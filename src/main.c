@@ -13,7 +13,7 @@ int main(void)
     GPIO_setAsOutputPin(GPIO_PORT_P2,GPIO_PIN1);
 //    EnableInterrupt_TimerA3_0();
     EnableTimerInterrupt_ms(TIM32_1_INT, 1000);
-//    EnableTimerInterrupt_ms(TIM_A3_INT, 10);
+    EnableTimerInterrupt_ms(TIM_A3_INT, 10);
 
     // Enable global interrupt
     Interrupt_enableMaster();
