@@ -3,3 +3,4 @@ CMakeListsPrivate.txt
 cmake-build-*/
 .idea
 /src/user/
+/src/main.c
