@@ -2,5 +2,7 @@
 CMakeListsPrivate.txt
 cmake-build-*/
 .idea
-/src/user/
-main.c
+/src/user/*
+/src/main.c
+/src/isr.c
+src/isr.c

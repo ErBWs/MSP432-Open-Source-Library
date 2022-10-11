@@ -829,7 +829,7 @@ extern bool ADC14_disableSampleTimer(void);
 //!                          ready signal.
 //!
 //!
-//! \return NONE
+//! \return NORMAL
 //
 //*****************************************************************************
 extern void ADC14_enableInterrupt(uint_fast64_t mask);
@@ -866,7 +866,7 @@ extern void ADC14_enableInterrupt(uint_fast64_t mask);
 //!                          ready signal.
 //!
 //!
-//! \return NONE
+//! \return NORMAL
 //
 //*****************************************************************************
 extern void ADC14_disableInterrupt(uint_fast64_t mask);
@@ -970,7 +970,7 @@ extern uint_fast64_t ADC14_getEnabledInterruptStatus(void);
 //!                          ready signal.
 //!
 //!
-//! \return NONE
+//! \return NORMAL
 //
 //*****************************************************************************
 extern void ADC14_clearInterruptFlag(uint_fast64_t mask);

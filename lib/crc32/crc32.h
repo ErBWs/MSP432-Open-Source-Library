@@ -57,7 +57,7 @@
 //! the given seed and all passed data. Using this function resets the CRC32
 //! signature.
 //!
-//! \return NONE
+//! \return NORMAL
 //
 //*****************************************************************************
 extern void CRC32_setSeed(uint32_t seed, uint_fast8_t crcType);
@@ -77,7 +77,7 @@ extern void CRC32_setSeed(uint32_t seed, uint_fast8_t crcType);
 //! signature from the current signature and new data. Bit 0 is
 //!    treated as LSB.
 //!
-//! \return NONE
+//! \return NORMAL
 //
 //*****************************************************************************
 extern void CRC32_set8BitData(uint8_t dataIn, uint_fast8_t crcType);
@@ -97,7 +97,7 @@ extern void CRC32_set8BitData(uint8_t dataIn, uint_fast8_t crcType);
 //! signature from the current signature and new data. Bit 0 is
 //!    treated as LSB
 //!
-//! \return NONE
+//! \return NORMAL
 //
 //*****************************************************************************
 extern void CRC32_set16BitData(uint16_t dataIn, uint_fast8_t crcType);
@@ -114,7 +114,7 @@ extern void CRC32_set16BitData(uint16_t dataIn, uint_fast8_t crcType);
 //! signature from the current signature and new data. Bit 0 is
 //!    treated as LSB
 //!
-//! \return NONE
+//! \return NORMAL
 //
 //*****************************************************************************
 extern void CRC32_set32BitData(uint32_t dataIn);
@@ -135,7 +135,7 @@ extern void CRC32_set32BitData(uint32_t dataIn);
 //! generates the new signature from the current signature and new translated
 //! data. Bit 0 is treated as MSB.
 //!
-//! \return NONE
+//! \return NORMAL
 //
 //*****************************************************************************
 extern void CRC32_set8BitDataReversed(uint8_t dataIn, uint_fast8_t crcType);
@@ -156,7 +156,7 @@ extern void CRC32_set8BitDataReversed(uint8_t dataIn, uint_fast8_t crcType);
 //! generates the new signature from the current signature and new translated
 //! data.  Bit 0 is treated as MSB.
 //!
-//! \return NONE
+//! \return NORMAL
 //
 //*****************************************************************************
 extern void CRC32_set16BitDataReversed(uint16_t dataIn, uint_fast8_t crcType);
@@ -174,7 +174,7 @@ extern void CRC32_set16BitDataReversed(uint16_t dataIn, uint_fast8_t crcType);
 //! generates the new signature from the current signature and new translated
 //! data.  Bit 0 is treated as MSB.
 //!
-//! \return NONE
+//! \return NORMAL
 //
 //*****************************************************************************
 extern void CRC32_set32BitDataReversed(uint32_t dataIn);

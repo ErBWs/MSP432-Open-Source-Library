@@ -67,7 +67,6 @@ void EnableTimerInterrupt(TimerInterrupt_e _timer, uint_fast16_t period)
                 };
 
         Timer_A_configureUpMode(timerAddress, &upConfig);
-        Interrupt_enableSleepOnIsrExit();
         Interrupt_enableInterrupt(timerNumber);
         Timer_A_startCounter(timerAddress, TIMER_A_UP_MODE);
         Timer_A_clearCaptureCompareInterrupt(timerAddress, TIMER_A_CAPTURECOMPARE_REGISTER_0);
@@ -155,7 +154,7 @@ void EnableUartInterrupt(uint32_t module, uint32_t baudRate, uint16_t status)
                     EUSCI_A_UART_OVERSAMPLING_BAUDRATE_GENERATION, // Oversampling
                     EUSCI_A_UART_8_BIT_LEN                         // 8 bit data length
             };
-    ConfigBaudRate((eUSCI_UART_ConfigV1 *) &uartConfig, baudRate); //配置波特率
+    ConfigBaudRate((eUSCI_UART_ConfigV1 *) &uartConfig, baudRate); // Set baud rate
 #else       // If using old version of sdk
     const eUSCI_UART_Config uartConfig =
         {
@@ -169,7 +168,7 @@ void EnableUartInterrupt(uint32_t module, uint32_t baudRate, uint16_t status)
             EUSCI_A_UART_MODE,                             // UART mode
             EUSCI_A_UART_OVERSAMPLING_BAUDRATE_GENERATION, // Oversampling
         };
-    eusci_calcBaudDividers((eUSCI_UART_Config *)&uartConfig, baudRate); //配置波特率
+    eusci_calcBaudDividers((eUSCI_UART_Config *)&uartConfig, baudRate); // Set baud rate
 #endif
 
     uint_fast8_t port;
@@ -219,4 +218,10 @@ void EnableUartInterrupt(uint32_t module, uint32_t baudRate, uint16_t status)
             return;
     }
     Interrupt_enableInterrupt(interruptNum);
+}
+
+
+void SetInterruptPriority(uint32_t module, uint8_t priorityNum)
+{
+    Interrupt_setPriority(module, priorityNum << 5);
 }

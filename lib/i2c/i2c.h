@@ -947,7 +947,7 @@ extern uint8_t I2C_masterReceiveSingle(uint32_t moduleInstance);
 //! Returns the address of the I2C RX Buffer. This can be used in conjunction
 //! with the DMA to store the received data directly to memory.
 //!
-//! \return NONE
+//! \return NORMAL
 //
 //*****************************************************************************
 extern uint32_t I2C_getReceiveBufferAddressForDMA(uint32_t moduleInstance);
@@ -970,7 +970,7 @@ extern uint32_t I2C_getReceiveBufferAddressForDMA(uint32_t moduleInstance);
 //! Returns the address of the I2C TX Buffer. This can be used in conjunction
 //! with the DMA to obtain transmitted data directly from memory.
 //!
-//! \return NONE
+//! \return NORMAL
 //
 //*****************************************************************************
 extern uint32_t I2C_getTransmitBufferAddressForDMA(uint32_t moduleInstance);

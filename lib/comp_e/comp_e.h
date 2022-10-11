@@ -248,7 +248,7 @@ extern bool COMP_E_initModule(uint32_t comparator, const COMP_E_Config *config);
 //! numerators are equal, then a static reference is defined, whereas they are
 //! different then a hysteresis effect is generated.
 //!
-//! \return NONE
+//! \return NORMAL
 //
 //*****************************************************************************
 extern void COMP_E_setReferenceVoltage(uint32_t comparator,
@@ -274,7 +274,7 @@ extern void COMP_E_setReferenceVoltage(uint32_t comparator,
 //! The reference accuracy is set to the desired setting. Clocked is better for
 //!  low power operations but has a lower accuracy.
 //!
-//! \return NONE
+//! \return NORMAL
 //
 //*****************************************************************************
 extern void COMP_E_setReferenceAccuracy(uint32_t comparator,
@@ -295,7 +295,7 @@ extern void COMP_E_setReferenceAccuracy(uint32_t comparator,
 //!        - \b COMP_E_ULTRA_LOW_POWER_MODE
 //!        <br>Modified bits are \b CEPWRMD of \b CECTL1 register.
 //!
-//! \return NONE
+//! \return NORMAL
 //
 //*****************************************************************************
 extern void COMP_E_setPowerMode(uint32_t comparator, uint_fast16_t powerMode);
@@ -312,7 +312,7 @@ extern void COMP_E_setPowerMode(uint32_t comparator, uint_fast16_t powerMode);
 //! This function sets the bit that enables the operation of the
 //! Comparator module.
 //!
-//! \return NONE
+//! \return NORMAL
 //
 //*****************************************************************************
 extern void COMP_E_enableModule(uint32_t comparator);
@@ -330,7 +330,7 @@ extern void COMP_E_enableModule(uint32_t comparator);
 //! module, saving from excess power consumption.
 //!
 //! Modified bits are \b CEON of \b CECTL1 register.
-//! \return NONE
+//! \return NORMAL
 //
 //*****************************************************************************
 extern void COMP_E_disableModule(uint32_t comparator);
@@ -348,7 +348,7 @@ extern void COMP_E_disableModule(uint32_t comparator);
 //! pins chosen from the initialization of the comparator.
 //!
 //! Modified bits are \b CESHORT of \b CECTL1 register.
-//! \return NONE
+//! \return NORMAL
 //
 //*****************************************************************************
 extern void COMP_E_shortInputs(uint32_t comparator);
@@ -366,7 +366,7 @@ extern void COMP_E_shortInputs(uint32_t comparator);
 //! pins chosen from the initialization of the comparator.
 //!
 //! Modified bits are \b CESHORT of \b CECTL1 register.
-//! \return NONE
+//! \return NORMAL
 //
 //*****************************************************************************
 extern void COMP_E_unshortInputs(uint32_t comparator);
@@ -407,7 +407,7 @@ extern void COMP_E_unshortInputs(uint32_t comparator);
 //! connected to one of these pins to prevent parasitic voltage from causing
 //! unexpected results.
 //!
-//! \return NONE
+//! \return NORMAL
 //
 //*****************************************************************************
 extern void COMP_E_disableInputBuffer(uint32_t comparator,
@@ -447,7 +447,7 @@ extern void COMP_E_disableInputBuffer(uint32_t comparator,
 //! This should not be reset if there is an analog signal connected to the
 //! specified input pin to prevent from unexpected results.
 //!
-//! \return NONE
+//! \return NORMAL
 //
 //*****************************************************************************
 extern void COMP_E_enableInputBuffer(uint32_t comparator,
@@ -468,7 +468,7 @@ extern void COMP_E_enableInputBuffer(uint32_t comparator,
 //! the inputs are routed to the opposite terminal and the output is inverted.
 //!
 //! Modified bits are \b CEEX of \b CECTL1 register.
-//! \return NONE
+//! \return NORMAL
 //
 //*****************************************************************************
 extern void COMP_E_swapIO(uint32_t comparator);
@@ -511,7 +511,7 @@ extern uint8_t COMP_E_outputValue(uint32_t comparator);
 //! interrupt is a rising edge of the output, this can be changed with the
 //! interruptSetEdgeDirection() function.
 //!
-//! \return NONE
+//! \return NORMAL
 //
 //*****************************************************************************
 extern void COMP_E_enableInterrupt(uint32_t comparator, uint_fast16_t mask);
@@ -535,7 +535,7 @@ extern void COMP_E_enableInterrupt(uint32_t comparator, uint_fast16_t mask);
 //! are enabled can be reflected to the processor interrupt; disabled sources
 //! have no effect on the processor.
 //!
-//! \return NONE
+//! \return NORMAL
 //
 //*****************************************************************************
 extern void COMP_E_disableInterrupt(uint32_t comparator, uint_fast16_t mask);
@@ -559,7 +559,7 @@ extern void COMP_E_disableInterrupt(uint32_t comparator, uint_fast16_t mask);
 //! The highest interrupt flag is automatically cleared when an interrupt vector
 //! generator is used.
 //!
-//! \return NONE
+//! \return NORMAL
 //
 //*****************************************************************************
 extern void COMP_E_clearInterruptFlag(uint32_t comparator, uint_fast16_t mask);
@@ -599,7 +599,7 @@ extern uint_fast16_t COMP_E_getInterruptStatus(uint32_t comparator);
 //! interrupt is a rising edge of the output, this can be changed with the
 //! COMP_E_setInterruptEdgeDirection() function.
 //!
-//! \return NONE
+//! \return NORMAL
 //
 //*****************************************************************************
 extern uint_fast16_t COMP_E_getEnabledInterruptStatus(uint32_t comparator);
@@ -629,7 +629,7 @@ extern uint_fast16_t COMP_E_getEnabledInterruptStatus(uint32_t comparator);
 //! rising or falling, to generate an interrupt based on a non-inverted
 //! interrupt.
 //!
-//! \return NONE
+//! \return NORMAL
 //
 //*****************************************************************************
 extern void COMP_E_setInterruptEdgeDirection(uint32_t comparator,
@@ -651,7 +651,7 @@ extern void COMP_E_setInterruptEdgeDirection(uint32_t comparator,
 //!
 //! Modified bits are \b CEIES of \b CECTL1 register.
 //!
-//! \return NONE
+//! \return NORMAL
 //
 //*****************************************************************************
 extern void COMP_E_toggleInterruptEdgeDirection(uint32_t comparator);
