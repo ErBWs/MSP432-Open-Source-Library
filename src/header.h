@@ -13,7 +13,9 @@
 #include "user_comm/delay.h"
 #include "user_comm/system.h"
 #include "user_comm/my_interrupt.h"
-#include "user_comm//pwm.h"
+#include "user_comm/pwm.h"
+#include "user_comm/uart.h"
+
 
 // User peripheral
 #include "user_peri/easy_key.h"
@@ -23,5 +25,6 @@
 #include "user/grayscale_sensor.h"
 #include "user/menu.h"
 #include "user/pid.h"
+#include "user/shanwai.h"
 
 #endif

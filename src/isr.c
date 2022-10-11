@@ -47,7 +47,7 @@ void T32_INT1_IRQHandler(void)
 {
     Timer32_clearInterruptFlag(TIMER32_0_BASE);     // Clear interrupt status
     // Write your code here
-
+    
     // Write your code here
 }
 

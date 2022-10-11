@@ -15,7 +15,7 @@
  *
  * @note        You cannot initialize different function on the same Timer
  *              e.g.You cannot initialize TimerA_0 as interrupt and pwm at the same time
- * @example     PwmInit(TMA0_PWM_CH2_P25, 50);
+ * @example     PwmInit(TMA0_PWM_CH2_P25, 50,1000);
  */
 void PwmInit(PwmChannel_e _pin, const uint32_t freq, const uint_fast16_t duty)
 {

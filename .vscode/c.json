@@ -1,0 +1,22 @@
+{
+	"#ifndef": {
+		"prefix": "#ifndef",
+		"body": [
+			"#ifndef _$0_H",
+			"#define _$0_H",
+			"\n",
+			"#endif"
+		],
+		"description": "use in create .h"
+	},
+	"#include":{
+		"prefix": "#include",
+		"body": [
+			"#include \"$0.h\" ",
+			"\n"
+		],
+		"description": "use in create .c"
+	}
+	
+	
+}
