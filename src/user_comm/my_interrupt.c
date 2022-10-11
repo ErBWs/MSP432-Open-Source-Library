@@ -155,7 +155,7 @@ void EnableUartInterrupt(uint32_t module, uint32_t baudRate, uint16_t status)
                     EUSCI_A_UART_OVERSAMPLING_BAUDRATE_GENERATION, // Oversampling
                     EUSCI_A_UART_8_BIT_LEN                         // 8 bit data length
             };
-    ConfigBaudRate((eUSCI_UART_ConfigV1 *) &uartConfig, baudRate); //配置波特率
+    ConfigBaudRate((eUSCI_UART_ConfigV1 *) &uartConfig, baudRate); // Set baud rate
 #else       // If using old version of sdk
     const eUSCI_UART_Config uartConfig =
         {
@@ -169,7 +169,7 @@ void EnableUartInterrupt(uint32_t module, uint32_t baudRate, uint16_t status)
             EUSCI_A_UART_MODE,                             // UART mode
             EUSCI_A_UART_OVERSAMPLING_BAUDRATE_GENERATION, // Oversampling
         };
-    eusci_calcBaudDividers((eUSCI_UART_Config *)&uartConfig, baudRate); //配置波特率
+    eusci_calcBaudDividers((eUSCI_UART_Config *)&uartConfig, baudRate); // Set baud rate
 #endif
 
     uint_fast8_t port;
