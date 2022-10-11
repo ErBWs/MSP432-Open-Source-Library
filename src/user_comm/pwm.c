@@ -11,11 +11,13 @@
  *
  * @param       _pin        See the typedef in pwm.h
  * @param       freq        Pwm output frequency
+ * @param       duty        Initial duty
  * @return      None
  *
  * @note        You cannot initialize different function on the same Timer
  *              e.g.You cannot initialize TimerA_0 as interrupt and pwm at the same time
- * @example     PwmInit(TMA0_PWM_CH2_P25, 50);
+ * @example     PwmInit(TMA0_PWM_CH2_P25, 50, 5000);
+ *              Initialize TimerA0, P2_5 as PWM, with 50 frequency and 5000 initial duty
  */
 void PwmInit(PwmChannel_e _pin, const uint32_t freq, const uint_fast16_t duty)
 {
