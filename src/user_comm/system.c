@@ -8,6 +8,7 @@
 
 void SystemClockInit()
 {
+    // static volatile uint32_t aclk, mclk, smclk, hsmclk, bclk;
     /* Stop Watchdog  */
     WDT_A_holdTimer();
 
@@ -19,6 +20,12 @@ void SystemClockInit()
 
     CS_setReferenceOscillatorFrequency(CS_REFO_128KHZ);
     CS_initClockSignal(CS_ACLK, CS_REFOCLK_SELECT, CS_CLOCK_DIVIDER_1);
+
+    // aclk = CS_getACLK();
+    // mclk = CS_getMCLK();
+    // smclk = CS_getSMCLK();
+    // hsmclk = CS_getHSMCLK();
+    // bclk = CS_getBCLK();
 
     FPU_enableModule();
     FPU_enableLazyStacking();
