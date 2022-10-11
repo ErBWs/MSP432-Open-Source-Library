@@ -30,7 +30,7 @@ void EnableTimerInterrupt(TimerInterrupt_e _timer, uint_fast16_t period);
 
 void EnableExternalInterrupt(uint_fast8_t port, uint_fast16_t pin, uint_fast8_t edge);
 
-void uart_init();
+void EnableUartInterrupt(uint32_t module, uint32_t baudRate, uint16_t status);
 
 
 #endif
