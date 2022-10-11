@@ -67,7 +67,6 @@ void EnableTimerInterrupt(TimerInterrupt_e _timer, uint_fast16_t period)
                 };
 
         Timer_A_configureUpMode(timerAddress, &upConfig);
-        Interrupt_enableSleepOnIsrExit();
         Interrupt_enableInterrupt(timerNumber);
         Timer_A_startCounter(timerAddress, TIMER_A_UP_MODE);
         Timer_A_clearCaptureCompareInterrupt(timerAddress, TIMER_A_CAPTURECOMPARE_REGISTER_0);

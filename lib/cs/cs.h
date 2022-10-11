@@ -213,7 +213,7 @@ extern void CS_setExternalClockSourceFrequency(uint32_t lfxt_XT_CLK_frequency,
 //!           - \b CS_CLOCK_DIVIDER_64,
 //!           - \b CS_CLOCK_DIVIDER_128
 //!
-//! \return NONE
+//! \return NORMAL
 //
 //******************************************************************************
 extern void CS_initClockSignal(uint32_t selectedClockSignal,
@@ -322,7 +322,7 @@ extern bool CS_startLFXTWithTimeout(uint32_t xtDrive, uint32_t timeout);
 //!        - \b CS_REFO_32KHZ,
 //!        - \b CS_REFO_128KHZ,
 //!
-//! \return NONE
+//! \return NORMAL
 //
 //******************************************************************************
 extern void CS_setReferenceOscillatorFrequency(uint8_t referenceFrequency);
@@ -338,7 +338,7 @@ extern void CS_setReferenceOscillatorFrequency(uint8_t referenceFrequency);
 //!        - \b CS_SMCLK,
 //!        - \b CS_MCLK
 //!
-//! \return NONE
+//! \return NORMAL
 //
 //******************************************************************************
 extern void CS_enableClockRequest(uint32_t selectClock);
@@ -354,7 +354,7 @@ extern void CS_enableClockRequest(uint32_t selectClock);
 //!        - \b CS_SMCLK,
 //!        - \b CS_MCLK
 //!
-//! \return NONE
+//! \return NORMAL
 //
 //******************************************************************************
 extern void CS_disableClockRequest(uint32_t selectClock);
@@ -444,7 +444,7 @@ extern uint32_t CS_getHSMCLK(void);
 //!        - \b CS_DCO_FREQUENCY_24,  [16MHz to 32MHz]
 //!        - \b CS_DCO_FREQUENCY_48   [32MHz to 64MHz]
 //!
-//! \return NONE
+//! \return NORMAL
 //
 //******************************************************************************
 extern void CS_setDCOCenteredFrequency(uint32_t dcoFreq);
@@ -488,7 +488,7 @@ extern void CS_setDCOFrequency(uint32_t dcoFrequency);
 //! \param tuneParameter Tuning parameter in 2's Compliment representation.
 //!  Can be negative or positive.
 //!
-//! \return NONE
+//! \return NORMAL
 //
 //******************************************************************************
 extern void CS_tuneDCOFrequency(int16_t tuneParameter);
@@ -497,7 +497,7 @@ extern void CS_tuneDCOFrequency(int16_t tuneParameter);
 //
 //! Enables the external resistor for DCO operation
 //!
-//! \return NONE
+//! \return NORMAL
 //
 //******************************************************************************
 extern void CS_enableDCOExternalResistor(void);
@@ -506,7 +506,7 @@ extern void CS_enableDCOExternalResistor(void);
 //
 //! Disables the external resistor for DCO operation
 //!
-//! \return NONE
+//! \return NORMAL
 //
 //******************************************************************************
 extern void CS_disableDCOExternalResistor(void);
@@ -583,7 +583,7 @@ extern void CS_setDCOFrequency(uint32_t dcoFrequency);
 //!        - \b CS_HFXT_FAULT_COUNTER
 //!        - \b CS_LFXT_FAULT_COUNTER
 //!
-//! \return NONE
+//! \return NORMAL
 //
 //******************************************************************************
 extern void CS_enableFaultCounter(uint_fast8_t counterSelect);
@@ -597,7 +597,7 @@ extern void CS_enableFaultCounter(uint_fast8_t counterSelect);
 //!        - \b CS_HFXT_FAULT_COUNTER
 //!        - \b CS_LFXT_FAULT_COUNTER
 //!
-//! \return NONE
+//! \return NORMAL
 //
 //******************************************************************************
 extern void CS_disableFaultCounter(uint_fast8_t counterSelect);
@@ -611,7 +611,7 @@ extern void CS_disableFaultCounter(uint_fast8_t counterSelect);
 //!        - \b CS_HFXT_FAULT_COUNTER
 //!        - \b CS_LFXT_FAULT_COUNTER
 //!
-//! \return NONE
+//! \return NORMAL
 //
 //******************************************************************************
 extern void CS_resetFaultCounter(uint_fast8_t counterSelect);
@@ -630,7 +630,7 @@ extern void CS_resetFaultCounter(uint_fast8_t counterSelect);
 //!        - \b CS_FAULT_COUNTER_16384_CYCLES
 //!        - \b CS_FAULT_COUNTER_32768_CYCLES
 //!
-//! \return NONE
+//! \return NORMAL
 //
 //******************************************************************************
 extern void CS_startFaultCounter(uint_fast8_t counterSelect,

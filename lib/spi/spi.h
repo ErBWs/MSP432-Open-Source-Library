@@ -438,7 +438,7 @@ extern void SPI_disableModule(uint32_t moduleInstance);
 //! Returns the address of the SPI RX Buffer. This can be used in conjunction
 //! with the DMA to store the received data directly to memory.
 //!
-//! \return NONE
+//! \return NORMAL
 //
 //*****************************************************************************
 extern uint32_t SPI_getReceiveBufferAddressForDMA(uint32_t moduleInstance);
@@ -462,7 +462,7 @@ extern uint32_t SPI_getReceiveBufferAddressForDMA(uint32_t moduleInstance);
 //! Returns the address of the SPI TX Buffer. This can be used in conjunction
 //! with the DMA to obtain transmitted data directly from memory.
 //!
-//! \return NONE
+//! \return NORMAL
 //
 //*****************************************************************************
 extern uint32_t SPI_getTransmitBufferAddressForDMA(uint32_t moduleInstance);
