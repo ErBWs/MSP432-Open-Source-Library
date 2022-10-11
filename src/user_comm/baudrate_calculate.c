@@ -79,6 +79,7 @@ void ConfigBaudRate(eUSCI_UART_Config *uart_config, uint32_t baudRate) //固件�
             uart_config->firstModReg = 8;
             uart_config->secondModReg = 32;
             uart_config->overSampling = EUSCI_A_UART_OVERSAMPLING_BAUDRATE_GENERATION;
+            return;
         }
     } else if (clockRate == 3000000)
     {
@@ -88,12 +89,14 @@ void ConfigBaudRate(eUSCI_UART_Config *uart_config, uint32_t baudRate) //固件�
             uart_config->firstModReg = 8;
             uart_config->secondModReg = 85;
             uart_config->overSampling = EUSCI_A_UART_OVERSAMPLING_BAUDRATE_GENERATION;
+            return;
         } else if (baudRate == 192000)
         {
             uart_config->clockPrescalar = 9;
             uart_config->firstModReg = 12;
             uart_config->secondModReg = 34;
             uart_config->overSampling = EUSCI_A_UART_OVERSAMPLING_BAUDRATE_GENERATION;
+            return;
         }
     }
 
