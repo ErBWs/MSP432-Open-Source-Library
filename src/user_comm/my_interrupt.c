@@ -219,3 +219,9 @@ void EnableUartInterrupt(uint32_t module, uint32_t baudRate, uint16_t status)
     }
     Interrupt_enableInterrupt(interruptNum);
 }
+
+
+void SetInterruptPriority(uint32_t module, uint8_t priorityNum)
+{
+    Interrupt_setPriority(module, priorityNum << 5);
+}
