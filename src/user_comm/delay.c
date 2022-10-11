@@ -27,3 +27,15 @@ void SystemDelay (uint32_t time, uint32_t num)
         while( !(SysTick->CTRL & SysTick_CTRL_COUNTFLAG_Msk));
     }
 }
+// void delay_us(uint32_t x)
+// {
+//   for (uint32_t i = 0; i < (x); i++)
+//     for (uint32_t j = 8; j > 0; j--)
+//       ;
+// }
+// void delay_ms(uint32_t x)
+// {
+//   for (uint32_t i = 0; i < (x); i++)
+//     for (uint32_t j = 8026; j > 0; j--)
+//       ;
+// }
