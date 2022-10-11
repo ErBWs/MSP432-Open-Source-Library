@@ -38,10 +38,7 @@ void TA3_0_IRQHandler(void)
 {
     MAP_Timer_A_clearCaptureCompareInterrupt(TIMER_A3_BASE, TIMER_A_CAPTURECOMPARE_REGISTER_0);// Clear interrupt status
     // Write your code here
-    EasyKeyHandler();
-    TestBench();
-    ReadGrayScaleSensor();
-    GrayScaleSensorHandler();
+
     // Write your code here
 }
 
