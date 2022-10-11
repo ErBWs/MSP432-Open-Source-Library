@@ -6,15 +6,6 @@
 
 #include "system.h"
 
-/*
- * 时钟：          默认时钟源         默认频率                    描述
- * MCLK             DCO              3MHZ           主时钟，向CPU和外设提供时钟
- * HSMCLK           DCO              3MHZ           子系统主时钟，向外设提供时钟源
- * SMCLK            DCO              3MHZ           低速系统主时钟，向外设提供时钟源
- * ACLK     LFXT(或REFO没有晶振时)   32.768kHz        辅助时钟，向外设提供时钟
- * BCLK     LFXT(或REFO没有晶振时)   32.768kHz        低速后配域时钟，提供LPM外设
- */
-
 void SystemClockInit()
 {
     /* Stop Watchdog  */

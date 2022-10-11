@@ -1,6 +1,6 @@
 /*!
  * @file    isr.c
- * @author  Baohan
+ * @author  Baohan, XieZhengYang
  * @date    2022/10/03
  */
 
@@ -323,4 +323,60 @@ void PORT6_IRQHandler(void)
 }
 
 
-/* UART IRQ Handler */
+/* Uart IRQ Handler */
+void EUSCIA0_IRQHandler(void)
+{
+    uint32_t status = UART_getEnabledInterruptStatus(EUSCI_A0_BASE);
+    if (status & EUSCI_A_UART_RECEIVE_INTERRUPT_FLAG)
+    {
+        UART_clearInterruptFlag(EUSCI_A0_BASE, EUSCI_A_UART_RECEIVE_INTERRUPT_FLAG);
+
+    }
+    if (status & EUSCI_A_UART_TRANSMIT_INTERRUPT_FLAG)
+    {
+        UART_clearInterruptFlag(EUSCI_A0_BASE, EUSCI_A_UART_TRANSMIT_INTERRUPT_FLAG);
+
+    }
+}
+void EUSCIA1_IRQHandler(void)
+{
+    uint32_t status = UART_getEnabledInterruptStatus(EUSCI_A1_BASE);
+    if (status & EUSCI_A_UART_RECEIVE_INTERRUPT_FLAG)
+    {
+        UART_clearInterruptFlag(EUSCI_A1_BASE, EUSCI_A_UART_RECEIVE_INTERRUPT_FLAG);
+
+    }
+    if (status & EUSCI_A_UART_TRANSMIT_INTERRUPT_FLAG)
+    {
+        UART_clearInterruptFlag(EUSCI_A1_BASE, EUSCI_A_UART_TRANSMIT_INTERRUPT_FLAG);
+
+    }
+}
+void EUSCIA2_IRQHandler(void)
+{
+    uint32_t status = UART_getEnabledInterruptStatus(EUSCI_A2_BASE);
+    if (status & EUSCI_A_UART_RECEIVE_INTERRUPT_FLAG)
+    {
+        UART_clearInterruptFlag(EUSCI_A2_BASE, EUSCI_A_UART_RECEIVE_INTERRUPT_FLAG);
+
+    }
+    if (status & EUSCI_A_UART_TRANSMIT_INTERRUPT_FLAG)
+    {
+        UART_clearInterruptFlag(EUSCI_A2_BASE, EUSCI_A_UART_TRANSMIT_INTERRUPT_FLAG);
+
+    }
+}
+void EUSCIA3_IRQHandler(void)
+{
+    uint32_t status = UART_getEnabledInterruptStatus(EUSCI_A3_BASE);
+    if (status & EUSCI_A_UART_RECEIVE_INTERRUPT_FLAG)
+    {
+        UART_clearInterruptFlag(EUSCI_A3_BASE, EUSCI_A_UART_RECEIVE_INTERRUPT_FLAG);
+
+    }
+    if (status & EUSCI_A_UART_TRANSMIT_INTERRUPT_FLAG)
+    {
+        UART_clearInterruptFlag(EUSCI_A3_BASE, EUSCI_A_UART_TRANSMIT_INTERRUPT_FLAG);
+
+    }
+}

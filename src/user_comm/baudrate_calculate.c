@@ -1,6 +1,15 @@
-#include "baudrate_calculate.h"
+/*!
+ * @file    baudrate_calculate.c
+ * @author  TI, m-RNA, XieZhengYang, ErBW_s
+ * @date    2022/10/04
+ * @note    This code is converted from JavaScript in the online calculator from TI:
+ *          https://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSP430BaudRateConverter/index.html
+ *          There are some errors in the origin C code:
+ *          3MHz with 9600bps, 3MHz with 192000bps and 48Mhz with 460800bps
+ *          I(ErBW_s) modified these errors by setting exceptions
+ */
 
-//void uart_warning_led(void);
+#include "baudrate_calculate.h"
 
 /*
  *  ======== bitPosition ========
@@ -14,7 +23,7 @@ bool bitPosition(uint16_t value, uint16_t position)
 }
 
 /*
- *  ======== eusci_calcBaudDividers ========
+ *  ======== ConfigBaudRate ========
  *  computes the eUSCI_UART register settings for a given clock and baud rate
  *
  *      UCOS16:      the oversampling bit (0 or 1)
@@ -28,9 +37,9 @@ bool bitPosition(uint16_t value, uint16_t position)
  *  MSP430FR57xx Family User's Guide (SLAU272A).
  */
 #ifdef EUSCI_A_UART_7_BIT_LEN
-void eusci_calcBaudDividers(eUSCI_UART_ConfigV1 *uart_config, uint32_t baudRate) //固件库v3_40_01_02
+void ConfigBaudRate(eUSCI_UART_ConfigV1 *uart_config, uint32_t baudRate) //固件库v3_40_01_02
 #else
-void eusci_calcBaudDividers(eUSCI_UART_Config *uart_config, uint32_t baudRate) //固件库v3_21_00_05
+void ConfigBaudRate(eUSCI_UART_Config *uart_config, uint32_t baudRate) //固件库v3_21_00_05
 #endif
 {
     float maxAbsErrorInByte;
@@ -42,9 +51,8 @@ void eusci_calcBaudDividers(eUSCI_UART_Config *uart_config, uint32_t baudRate) /
     uint32_t count;
     uint32_t clockRate;
 
-    if (!uart_config || !baudRate) //传参错误 退出函数
+    if (!uart_config || !baudRate)
     {
-        //uart_warning_led(); //闪烁错误指示灯10次
         return;
     }
 
@@ -57,14 +65,39 @@ void eusci_calcBaudDividers(eUSCI_UART_Config *uart_config, uint32_t baudRate) /
         uart_config->selectClockSource = EUSCI_A_UART_CLOCKSOURCE_SMCLK;
         clockRate = MAP_CS_getSMCLK();
     }
-    if (baudRate > clockRate) //判断波特率是否大于时钟频率 是则退出函数
+    if (baudRate > clockRate)
     {
-        //uart_warning_led(); //闪烁错误指示灯10次
         return;
     }
-    //var result = {UCOS16 : 0, UCBRx : 0, UCFx : 0, UCSx : 0, maxAbsError : 0};
 
-    NN = (uint16_t)((float)clockRate / (float)baudRate); //应该是不需要floor
+    // Exceptions
+    if (clockRate == 48000000)
+    {
+        if (baudRate == 460800)
+        {
+            uart_config->clockPrescalar = 6;
+            uart_config->firstModReg = 8;
+            uart_config->secondModReg = 32;
+            uart_config->overSampling = EUSCI_A_UART_OVERSAMPLING_BAUDRATE_GENERATION;
+        }
+    } else if (clockRate == 3000000)
+    {
+        if (baudRate == 9600)
+        {
+            uart_config->clockPrescalar = 19;
+            uart_config->firstModReg = 8;
+            uart_config->secondModReg = 85;
+            uart_config->overSampling = EUSCI_A_UART_OVERSAMPLING_BAUDRATE_GENERATION;
+        } else if (baudRate == 192000)
+        {
+            uart_config->clockPrescalar = 9;
+            uart_config->firstModReg = 12;
+            uart_config->secondModReg = 34;
+            uart_config->overSampling = EUSCI_A_UART_OVERSAMPLING_BAUDRATE_GENERATION;
+        }
+    }
+
+    NN = (uint16_t)((float)clockRate / (float)baudRate);
 
     minAbsError = 100000;
     for (jj = 0; jj <= 255; jj++)
@@ -77,7 +110,7 @@ void eusci_calcBaudDividers(eUSCI_UART_Config *uart_config, uint32_t baudRate) /
             count += NN + bitPosition(jj, 7 - (ii % 8));
 
             //error = (ii + 1) * baudPeriod - count * clockPeriod;
-            error = (ii + 1) / (float)baudRate - count / (float)clockRate; //为了减少变量，改为此代码
+            error = (ii + 1) / (float)baudRate - count / (float)clockRate;
 
             if (error < 0)
                 error = -error;
@@ -85,7 +118,7 @@ void eusci_calcBaudDividers(eUSCI_UART_Config *uart_config, uint32_t baudRate) /
             if (error > maxAbsErrorInByte)
                 maxAbsErrorInByte = error;
         }
-        if (maxAbsErrorInByte - minAbsError < -7.3e-12f) //这里就是“已知问题”
+        if (maxAbsErrorInByte - minAbsError < -7.3e-12f)
         {
             minAbsError = maxAbsErrorInByte;
             uart_config->secondModReg = jj;
@@ -101,28 +134,8 @@ void eusci_calcBaudDividers(eUSCI_UART_Config *uart_config, uint32_t baudRate) /
     else
     {
         uart_config->overSampling = 1;
-        uart_config->clockPrescalar = (uint16_t)((float)NN / 16.0f); //应该是不需要floor
+        uart_config->clockPrescalar = (uint16_t)((float)NN / 16.0f);
         uart_config->firstModReg = NN - (uart_config->clockPrescalar * 16);
     }
     //return minAbsError * baudRate * 100;
 }
-
-////闪烁错误指示灯10次
-//void uart_warning_led(void)
-//{
-//    uint8_t ii;
-//    uint32_t jj;
-//    WARN_LED_INIT(WARN_LED_1_PORT, WARN_LED_1_PIN);
-//    WARN_LED_INIT(WARN_LED_2_PORT, WARN_LED_2_PIN);
-//    for (ii = 0; ii < 10; ii++)
-//    {
-//        WARN_LED_ON(WARN_LED_1_PORT, WARN_LED_1_PIN);
-//        WARN_LED_OFF(WARN_LED_2_PORT, WARN_LED_2_PIN);
-//        for (jj = 0; jj < 100000; jj++)
-//            ;
-//        WARN_LED_OFF(WARN_LED_1_PORT, WARN_LED_1_PIN);
-//        WARN_LED_ON(WARN_LED_2_PORT, WARN_LED_2_PIN);
-//        for (jj = 0; jj < 100000; jj++)
-//            ;
-//    }
-//}

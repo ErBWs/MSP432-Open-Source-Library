@@ -11,11 +11,6 @@
 #include "driverlib.h"
 #include "memory.h"
 
-#define  LFXT    1
-#define  HFXT    2
-#define  DCO     3
-#define  REFO    4
-
 void SystemClockInit();
 
 

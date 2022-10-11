@@ -52,6 +52,8 @@ void EnableTimerInterrupt(TimerInterrupt_e _timer, uint_fast16_t period)
                 timerAddress = TIMER_A3_BASE;
                 timerNumber = INT_TA3_0;
                 break;
+            default:
+                return;
         }
 
         Timer_A_UpModeConfig upConfig =
@@ -86,6 +88,8 @@ void EnableTimerInterrupt(TimerInterrupt_e _timer, uint_fast16_t period)
                 timerAddress = TIMER32_1_BASE;
                 timerNumber = INT_T32_INT2;
                 break;
+            default:
+                return;
         }
 
         Timer32_initModule(timerAddress, TIMER32_PRESCALER_1, TIMER32_32BIT, TIMER32_PERIODIC_MODE);
@@ -115,70 +119,104 @@ void EnableExternalInterrupt(uint_fast8_t port, uint_fast16_t pin, uint_fast8_t 
         return;
     }
     GPIO_setAsInputPinWithPullUpResistor(port, pin);
-    GPIO_clearInterruptFlag(port,pin);
-    GPIO_interruptEdgeSelect(port,pin,edge);
-    GPIO_enableInterrupt(port,pin);
+    GPIO_clearInterruptFlag(port, pin);
+    GPIO_interruptEdgeSelect(port, pin, edge);
+    GPIO_enableInterrupt(port, pin);
     Interrupt_enableInterrupt(port + 50);
 }
 
 
 /*!
  * @brief       Init Uart interrupt
- * @param       moduleIstance:EUSCI_A0_BASE EUSCI_A1_BASE EUSCI_A2_BASE EUSCI_A3_BASE
- *              baudRate:115200
- * @note        EUSCI_A0_BASE(P1.2|P1.3) EUSCI_A1_BASE(P2.2|P2.3) EUSCI_A2_BASE(P3.2|P3.3) EUSCI_A3_BASE(P9.6|P9.7)
+ * @param       module          Fill this with EUSCI_A0_BASE, EUSCI_A1_BASE, EUSCI_A2_BASE or EUSCI_A3_BASE
+ * @param       baudRate        Default is 115200
+ * @param       status          Fill this with EUSCI_A_UART_RECEIVE_INTERRUPT
+ *                                             EUSCI_A_UART_TRANSMIT_INTERRUPT
+ *                                             EUSCI_A_UART_RECEIVE_ERRONEOUSCHAR_INTERRUPT
+ *                                             EUSCI_A_UART_BREAKCHAR_INTERRUPT
+ * @return      None
+ *
+ * @note        Note the pin definition: Ax(RXD|TXD)
+ *              A0(P1.2|P1.3) A1(P2.2|P2.3) A2(P3.2|P3.3) A3(P9.6|P9.7)
  */
-void uart_init(uint32_t moduleInstance,uint32_t baudRate)
+void EnableUartInterrupt(uint32_t module, uint32_t baudRate, uint16_t status)
 {
-  const eUSCI_UART_ConfigV1 uartConfig =
-      {
-          EUSCI_A_UART_CLOCKSOURCE_SMCLK,                // SMCLK Clock Source
-          26,                                            // BRDIV = 26
-          0,                                             // UCxBRF = 0
-          111,                                           // UCxBRS = 111
-          EUSCI_A_UART_NO_PARITY,                        // No Parity
-          EUSCI_A_UART_LSB_FIRST,                        // MSB First
-          EUSCI_A_UART_ONE_STOP_BIT,                     // One stop bit
-          EUSCI_A_UART_MODE,                             // UART mode
-          EUSCI_A_UART_OVERSAMPLING_BAUDRATE_GENERATION, // Oversampling
-          EUSCI_A_UART_8_BIT_LEN                         // 8 bit data length
-      };
-  eusci_calcBaudDividers((eUSCI_UART_ConfigV1 *)&uartConfig, baudRate); //config baudrate
-        switch (moduleInstance)
+#ifdef EUSCI_A_UART_7_BIT_LEN       // If using new version of sdk
+    const eUSCI_UART_ConfigV1 uartConfig =
+            {
+                    EUSCI_A_UART_CLOCKSOURCE_SMCLK,                // SMCLK Clock Source
+                    26,                                            // BRDIV = 26
+                    0,                                             // UCxBRF = 0
+                    111,                                           // UCxBRS = 111
+                    EUSCI_A_UART_NO_PARITY,                        // No Parity
+                    EUSCI_A_UART_LSB_FIRST,                        // MSB First
+                    EUSCI_A_UART_ONE_STOP_BIT,                     // One stop bit
+                    EUSCI_A_UART_MODE,                             // UART mode
+                    EUSCI_A_UART_OVERSAMPLING_BAUDRATE_GENERATION, // Oversampling
+                    EUSCI_A_UART_8_BIT_LEN                         // 8 bit data length
+            };
+    ConfigBaudRate((eUSCI_UART_ConfigV1 *) &uartConfig, baudRate); //配置波特率
+#else       // If using old version of sdk
+    const eUSCI_UART_Config uartConfig =
         {
+            EUSCI_A_UART_CLOCKSOURCE_SMCLK,                // SMCLK Clock Source
+            26,                                            // BRDIV = 26
+            0,                                             // UCxBRF = 0
+            111,                                           // UCxBRS = 111
+            EUSCI_A_UART_NO_PARITY,                        // No Parity
+            EUSCI_A_UART_LSB_FIRST,                        // MSB First
+            EUSCI_A_UART_ONE_STOP_BIT,                     // One stop bit
+            EUSCI_A_UART_MODE,                             // UART mode
+            EUSCI_A_UART_OVERSAMPLING_BAUDRATE_GENERATION, // Oversampling
+        };
+    eusci_calcBaudDividers((eUSCI_UART_Config *)&uartConfig, baudRate); //配置波特率
+#endif
+
+    uint_fast8_t port;
+    uint_fast16_t pin;
+    uint32_t interruptNum;
+
+    switch (module)
+    {
         case EUSCI_A0_BASE:
-                MAP_GPIO_setAsPeripheralModuleFunctionOutputPin(GPIO_PORT_P1, GPIO_PIN2 | GPIO_PIN3, GPIO_PRIMARY_MODULE_FUNCTION);
-                break;
+            port = GPIO_PORT_P1;
+            pin = GPIO_PIN2 | GPIO_PIN3;
+            break;
         case EUSCI_A1_BASE:
-                MAP_GPIO_setAsPeripheralModuleFunctionOutputPin(GPIO_PORT_P2, GPIO_PIN2 | GPIO_PIN3, GPIO_PRIMARY_MODULE_FUNCTION);
-                break;
+            port = GPIO_PORT_P2;
+            pin = GPIO_PIN2 | GPIO_PIN3;
+            break;
         case EUSCI_A2_BASE:
-                MAP_GPIO_setAsPeripheralModuleFunctionOutputPin(GPIO_PORT_P3, GPIO_PIN2 | GPIO_PIN3, GPIO_PRIMARY_MODULE_FUNCTION);
-                break;
+            port = GPIO_PORT_P3;
+            pin = GPIO_PIN2 | GPIO_PIN3;
+            break;
         case EUSCI_A3_BASE:
-                MAP_GPIO_setAsPeripheralModuleFunctionOutputPin(GPIO_PORT_P9, GPIO_PIN6 | GPIO_PIN7, GPIO_PRIMARY_MODULE_FUNCTION);
-                break;
+            port = GPIO_PORT_P9;
+            pin = GPIO_PIN6 | GPIO_PIN7;
+            break;
         default:
-                break;
-        }
-        MAP_UART_initModule( moduleInstance, &uartConfig);       
-        MAP_UART_enableModule( moduleInstance);
-        MAP_UART_enableInterrupt(moduleInstance,EUSCI_A_UART_RECEIVE_INTERRUPT);        
-        switch (moduleInstance)
-        {
+            return;
+    }
+    GPIO_setAsPeripheralModuleFunctionOutputPin(port, pin, GPIO_PRIMARY_MODULE_FUNCTION);
+    UART_initModule(module, &uartConfig);
+    UART_enableModule(module);
+    UART_enableInterrupt(module, status);
+    switch (module)
+    {
         case EUSCI_A0_BASE:
-                Interrupt_enableInterrupt(INT_EUSCIA0);
-                break;                
+            interruptNum = INT_EUSCIA0;
+            break;
         case EUSCI_A1_BASE:
-                Interrupt_enableInterrupt(INT_EUSCIA1);
-                break;
+            interruptNum = INT_EUSCIA1;
+            break;
         case EUSCI_A2_BASE:
-                Interrupt_enableInterrupt(INT_EUSCIA2);
-                break;
+            interruptNum = INT_EUSCIA2;
+            break;
         case EUSCI_A3_BASE:
-                Interrupt_enableInterrupt(INT_EUSCIA3);
-                break;
+            interruptNum = INT_EUSCIA3;
+            break;
         default:
-                break;
-        }
+            return;
+    }
+    Interrupt_enableInterrupt(interruptNum);
 }
