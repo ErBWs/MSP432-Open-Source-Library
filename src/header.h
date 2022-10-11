@@ -14,7 +14,6 @@
 #include "user_comm/system.h"
 #include "user_comm/my_interrupt.h"
 #include "user_comm//pwm.h"
-#include "user_comm/baudrate_calculate.h"
 
 // User peripheral
 #include "user_peri/easy_key.h"

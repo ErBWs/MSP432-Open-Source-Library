@@ -13,8 +13,6 @@
 #define sysClk      48000000          // System clock
 
 void        SystemDelay            (uint32_t time, uint32_t num);
-// void        delay_us(uint32_t x);
-// void        delay_ms(uint32_t x);
 
 // User call
 #define     Delay_ms(time)   SystemDelay(1000000, (time))
