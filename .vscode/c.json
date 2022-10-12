@@ -5,6 +5,9 @@
 			"#ifndef _$0_H",
 			"#define _$0_H",
 			"\n",
+			"#include \"driverlib.h\" ",
+			"#include \"header.h\" ",
+			"\n",
 			"#endif"
 		],
 		"description": "use in create .h"
@@ -16,7 +19,26 @@
 			"\n"
 		],
 		"description": "use in create .c"
+	},
+	"#user_comm.h":{
+		"prefix":"#include in header.h",
+		"body":[
+			"#include \"user_comm/$0.h\" "
+		],
+		"description":"use in add user_comm.h"
+	},
+	"#user_peri.h":{
+		"prefix":"#include in header.h",
+		"body":[
+			"#include \"user_peri/$0.h\" "
+		],
+		"description":"use in add user_peri.h"
+	},
+	"#user.h":{
+		"prefix":"#include in header.h",
+		"body":[
+			"#include \"user/$0.h\" "
+		],
+		"description":"use in add user.h"
 	}
-	
-	
 }

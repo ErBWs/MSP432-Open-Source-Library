@@ -12,7 +12,8 @@
 			"eusci.h": "c",
 			"isr.h": "c",
 			"interrupt.h": "c",
-			"cstdint": "c"
+			"cstdint": "c",
+			"stdint.h": "c"
 		}
 	}
 }

@@ -22,7 +22,7 @@ int main(void)
 
     // Enable global interrupt
     Interrupt_enableMaster();
-
+   
     while (1)
     {
 
