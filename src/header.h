@@ -19,6 +19,8 @@
 
 // User peripheral
 #include "user_peri/easy_key.h"
+#include "user_peri/IIC_soft.h"
+#include "user_peri/ICM20602.h" 
 
 // User code
 #include "user/ctrl.h"
