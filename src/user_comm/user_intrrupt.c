@@ -22,7 +22,7 @@
  *              }
  *              count = 0;
  */
-void EnableTimerInterrupt(TimerInterrupt_e _timer, uint_fast16_t period)
+void EnableTimerInterrupt(TimerInterruptPinEnum _timer, uint_fast16_t period)
 {
     uint_fast32_t userPeriod;
     uint_fast16_t timerAddress;

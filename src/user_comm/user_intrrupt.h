@@ -22,9 +22,9 @@ typedef enum
     // Timer32
     TIM32_1_INT,
     TIM32_2_INT,
-} TimerInterrupt_e;
+} TimerInterruptPinEnum;
 
-void EnableTimerInterrupt(TimerInterrupt_e _timer, uint_fast16_t period);
+void EnableTimerInterrupt(TimerInterruptPinEnum _timer, uint_fast16_t period);
 
 
 #define EnableTimerInterrupt_us(_timer, period)     EnableTimerInterrupt(_timer, period)

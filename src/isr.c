@@ -328,7 +328,7 @@ void EUSCIA0_IRQHandler(void)
     {
         UART_clearInterruptFlag(EUSCI_A0_BASE, EUSCI_A_UART_RECEIVE_INTERRUPT_FLAG);
         // Write your code here
-
+        UART_transmitData(EUSCI_A0_BASE, UART_receiveData(EUSCI_A0_BASE));
         // Write your code here
     }
     if (status & EUSCI_A_UART_TRANSMIT_INTERRUPT_FLAG)

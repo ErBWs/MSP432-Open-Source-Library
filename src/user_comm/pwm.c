@@ -19,12 +19,13 @@
  * @example     PwmInit(TMA0_PWM_CH2_P25, 50, 5000);
  *              Initialize TimerA0, P2_5 as PWM, with 50 frequency and 5000 initial duty
  */
-void PwmInit(PwmChannel_e _pin, const uint32_t freq, const uint_fast16_t duty)
+void PwmInit(PwmChannelEnum _pin, const uint32_t freq, const uint_fast16_t duty)
 {
     // GPIO initialization
     uint_fast8_t port;
     uint_fast16_t pin;
-    switch ((_pin & 0x00F0) >> 4)
+    uint_fast8_t af;
+    switch ((_pin & 0x000F0) >> 4)
     {
         case 2: port = GPIO_PORT_P2;    break;
         case 5: port = GPIO_PORT_P5;    break;
@@ -34,7 +35,7 @@ void PwmInit(PwmChannel_e _pin, const uint32_t freq, const uint_fast16_t duty)
         case 9: port = GPIO_PORT_P9;    break;
         case 10: port = GPIO_PORT_P10;  break;
     }
-    switch (_pin & 0x000F)
+    switch (_pin & 0x0000F)
     {
         case 0: pin = GPIO_PIN0;        break;
         case 1: pin = GPIO_PIN1;        break;
@@ -45,14 +46,20 @@ void PwmInit(PwmChannel_e _pin, const uint32_t freq, const uint_fast16_t duty)
         case 6: pin = GPIO_PIN6;        break;
         case 7: pin = GPIO_PIN7;        break;
     }
-    GPIO_setAsPeripheralModuleFunctionOutputPin(port, pin, GPIO_PRIMARY_MODULE_FUNCTION);
+    switch ((_pin & 0x00F00) >> 8)
+    {
+        case 0: af = GPIO_PRIMARY_MODULE_FUNCTION;      break;
+        case 1: af = GPIO_SECONDARY_MODULE_FUNCTION;    break;
+        case 3: af = GPIO_TERTIARY_MODULE_FUNCTION;     break;
+    }
+    GPIO_setAsPeripheralModuleFunctionOutputPin(port, pin, af);
 
     // Get Timer period
     uint32_t arr = 1000000 / freq - 1;
 
     // Get channel
     uint_fast16_t channel;
-    switch ((_pin & 0x0F00) >> 8)
+    switch ((_pin & 0x0F000) >> 12)
     {
         case 0: channel = TIMER_A_CAPTURECOMPARE_REGISTER_0;     break;
         case 1: channel = TIMER_A_CAPTURECOMPARE_REGISTER_1;     break;
@@ -74,7 +81,7 @@ void PwmInit(PwmChannel_e _pin, const uint32_t freq, const uint_fast16_t duty)
 
     // Output PWM
     uint32_t timerA;
-    switch ((_pin & 0xF000) >> 12)
+    switch ((_pin & 0xF0000) >> 16)
     {
         case 0: timerA = TIMER_A0_BASE;      break;
         case 1: timerA = TIMER_A1_BASE;      break;
@@ -92,14 +99,14 @@ void PwmInit(PwmChannel_e _pin, const uint32_t freq, const uint_fast16_t duty)
  * @param       duty        Pwm duty
  * @return      None
  */
-void SetPwmDuty(PwmChannel_e _pin, const uint_fast16_t duty)
+void SetPwmDuty(PwmChannelEnum _pin, const uint_fast16_t duty)
 {
     if (duty > PWM_DUTY_MAX)
         return;
 
     // Get timer
     uint32_t timerA;
-    switch ((_pin & 0xF000) >> 12)
+    switch ((_pin & 0xF0000) >> 16)
     {
         case 0: timerA = TIMER_A0_BASE;      break;
         case 1: timerA = TIMER_A1_BASE;      break;
@@ -109,7 +116,7 @@ void SetPwmDuty(PwmChannel_e _pin, const uint_fast16_t duty)
 
     // Get channel
     uint_fast16_t channel;
-    switch ((_pin & 0x0F00) >> 8)
+    switch ((_pin & 0x0F000) >> 12)
     {
         case 0: channel = TIMER_A_CAPTURECOMPARE_REGISTER_0;     break;
         case 1: channel = TIMER_A_CAPTURECOMPARE_REGISTER_1;     break;
