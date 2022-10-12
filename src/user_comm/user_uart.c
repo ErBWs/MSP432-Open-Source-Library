@@ -1,4 +1,4 @@
-#include "uart.h"
+#include "user_uart.h"
 
 //UART_PutChar( moduleInstance, transmitData);
 
