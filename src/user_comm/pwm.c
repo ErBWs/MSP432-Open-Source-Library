@@ -22,19 +22,8 @@
 void PwmInit(PwmChannelEnum _pin, const uint32_t freq, const uint_fast16_t duty)
 {
     // GPIO initialization
-    uint_fast8_t port;
     uint_fast16_t pin;
     uint_fast8_t af;
-    switch ((_pin & 0x000F0) >> 4)
-    {
-        case 2: port = GPIO_PORT_P2;    break;
-        case 5: port = GPIO_PORT_P5;    break;
-        case 6: port = GPIO_PORT_P6;    break;
-        case 7: port = GPIO_PORT_P7;    break;
-        case 8: port = GPIO_PORT_P8;    break;
-        case 9: port = GPIO_PORT_P9;    break;
-        case 10: port = GPIO_PORT_P10;  break;
-    }
     switch (_pin & 0x0000F)
     {
         case 0: pin = GPIO_PIN0;        break;
@@ -50,9 +39,8 @@ void PwmInit(PwmChannelEnum _pin, const uint32_t freq, const uint_fast16_t duty)
     {
         case 0: af = GPIO_PRIMARY_MODULE_FUNCTION;      break;
         case 1: af = GPIO_SECONDARY_MODULE_FUNCTION;    break;
-        case 3: af = GPIO_TERTIARY_MODULE_FUNCTION;     break;
     }
-    GPIO_setAsPeripheralModuleFunctionOutputPin(port, pin, af);
+    GPIO_setAsPeripheralModuleFunctionOutputPin((uint_fast8_t)((_pin & 0x000F0) >> 4), pin, af);
 
     // Get Timer period
     uint32_t arr = 1000000 / freq - 1;

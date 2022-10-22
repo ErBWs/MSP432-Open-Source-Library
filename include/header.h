@@ -7,13 +7,14 @@
 #ifndef _HEADER_H_
 #define _HEADER_H_
 
-#include <driverlib.h>
+#include "driverlib.h"
 
 // User common
 #include "user_comm/delay.h"
 #include "user_comm/system.h"
 #include "user_comm/user_intrrupt.h"
 #include "user_comm/pwm.h"
+#include "user_comm/user_spi.h"
 #include "user_comm/user_uart.h"
 #include "user_comm/shanwai.h"
 

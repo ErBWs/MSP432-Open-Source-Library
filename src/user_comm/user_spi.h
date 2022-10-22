@@ -71,7 +71,20 @@ typedef enum
 
 typedef enum
 {
-
+    SPI_MODE0,          // Low pin level while inactive and data captured on SCK 1st edge, changed on 2nd edge
+    SPI_MODE1,          // Low pin level while inactive and data changed on SCK 1st edge, captured on 2nd edge
+    SPI_MODE2,          // High pin level while inactive and data captured on SCK 1st edge, changed on 2nd edge
+    SPI_MODE3,          // High pin level while inactive and data changed on SCK 1st edge, captured on 2nd edge
 }SpiModeEnum;
+
+typedef enum
+{
+    SPI_CS_MODE_NULL,   // Fill with this if not using hardware cs
+
+    SPI_CS_MODE0,       // CS high pin level activate
+    SPI_CS_MODE1,       // CS low pin level activate
+}SpiCsModeEnum;
+
+void SpiInit(SpiModeEnum _mode, SpiCsModeEnum _csMode, uint32_t baud, SpiClkPinEnum _clkPin, SpiMosiPinEnum _mosiPin, SpiMisoPinEnum _misoPin, SpiCsPinEnum _csPin);
 
 #endif

@@ -21,11 +21,11 @@
 
 
 
-typedef unsigned char   uint8 	;
+typedef unsigned char   uint8_t 	;
 typedef unsigned int    uint16 	;
 typedef long            int32	;
 
-extern uint8 tft_ascii_1[95][16];
+extern uint8_t tft_ascii_1[95][16];
 
 
 #endif
