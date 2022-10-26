@@ -43,13 +43,11 @@ void TA3_0_IRQHandler(void)
 }
 
 
-int16_t error;
 void T32_INT1_IRQHandler(void)
 {
     Timer32_clearInterruptFlag(TIMER32_0_BASE);     // Clear interrupt status
     // Write your code here
-    error = GetGrayScaleSensorError(&error);
-    SpeedControl(error);
+
     // Write your code here
 }
 
@@ -330,7 +328,7 @@ void EUSCIA0_IRQHandler(void)
     {
         UART_clearInterruptFlag(EUSCI_A0_BASE, EUSCI_A_UART_RECEIVE_INTERRUPT_FLAG);
         // Write your code here
-        UART_transmitData(EUSCI_A0_BASE, UART_receiveData(EUSCI_A0_BASE));
+
         // Write your code here
     }
     if (status & EUSCI_A_UART_TRANSMIT_INTERRUPT_FLAG)
