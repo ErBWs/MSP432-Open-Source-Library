@@ -4,6 +4,4 @@ CMakeListsPrivate.txt
 cmake-build-*/
 .idea
 src/user/*
-src/main.c
-src/isr.c
 src/msp432p401r.code-workspace
