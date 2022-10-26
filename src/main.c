@@ -1,9 +1,6 @@
 #include <driverlib.h>
 #include "header.h"
 
-
-uint8_t test = 10;
-
 int main(void)
 {
     // System initialization
