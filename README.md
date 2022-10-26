@@ -6,7 +6,7 @@
 
 欢迎pull request，不过请保持代码风格一致。
 
-> 外设库放在 `user_peri` 文件夹内；
+> 外设库放在 `/src/bsp` 文件夹内；
 > 
 > 代码文件命名风格：小写+下划线 `e.g. baudrate_calculate.c`；
 > 
