@@ -43,11 +43,13 @@ void TA3_0_IRQHandler(void)
 }
 
 
+int16_t error;
 void T32_INT1_IRQHandler(void)
 {
     Timer32_clearInterruptFlag(TIMER32_0_BASE);     // Clear interrupt status
     // Write your code here
-    
+    error = GetGrayScaleSensorError(&error);
+    SpeedControl(error);
     // Write your code here
 }
 

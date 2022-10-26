@@ -10,19 +10,19 @@
 #include "driverlib.h"
 
 // User common
-#include "user_comm/delay.h"
-#include "user_comm/system.h"
-#include "user_comm/user_intrrupt.h"
-#include "user_comm/pwm.h"
-#include "user_comm/user_spi.h"
-#include "user_comm/user_uart.h"
-#include "user_comm/shanwai.h"
+#include "driver/delay.h"
+#include "driver/system.h"
+#include "driver/user_intrrupt.h"
+#include "driver/pwm.h"
+#include "driver/user_spi.h"
+#include "driver/user_uart.h"
+#include "driver/shanwai.h"
 
 // User peripheral
-#include "user_peri/easy_key.h"
-#include "user_peri/IIC_soft.h"
-#include "user_peri/ICM20602.h" 
-#include "user_peri/tft180.h"
+#include "bsp/easy_key.h"
+#include "bsp/IIC_soft.h"
+#include "bsp/ICM20602.h" 
+#include "bsp/tft180.h"
 
 // User code
 #include "user/ctrl.h"
