@@ -1,7 +1,0 @@
-{
-    "files.associations": {
-        "header.h": "c",
-        "cstdint": "c",
-        "driverlib.h": "c"
-    }
-}
