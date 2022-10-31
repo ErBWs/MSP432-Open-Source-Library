@@ -7,12 +7,18 @@
 
 #include "system.h"
 
+/*!
+ * @brief       Initialize the whole system
+ *
+ * @param       None
+ * @return      None
+ */
 void SystemClockInit()
 {
-    /* Stop Watchdog  */
+    // Stop watchdog
     WDT_A_holdTimer();
 
-    /* Setting DCO to 48MHz (upping Vcore) */
+    // Set DCO to 48MHz (need to change core voltage)
     FlashCtl_setWaitState(FLASH_BANK0, 1);
     FlashCtl_setWaitState(FLASH_BANK1, 1);
     PCM_setCoreVoltageLevel(PCM_VCORE1);
@@ -21,6 +27,7 @@ void SystemClockInit()
     CS_setReferenceOscillatorFrequency(CS_REFO_128KHZ);
     CS_initClockSignal(CS_ACLK, CS_REFOCLK_SELECT, CS_CLOCK_DIVIDER_1);
 
+    // Enable FPU
     FPU_enableModule();
     FPU_enableLazyStacking();
 }

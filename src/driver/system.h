@@ -8,11 +8,8 @@
 #ifndef SYSTEM_H
 #define SYSTEM_H
 
-#include <stdint.h>
-#include "driverlib.h"
-#include "memory.h"
+#include <driverlib.h>
 
 void SystemClockInit();
-
 
 #endif

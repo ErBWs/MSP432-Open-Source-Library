@@ -125,7 +125,7 @@ void SpiInit(SpiModeEnum _mode, SpiCsModeEnum _csMode, uint32_t baud, SpiClkPinE
             {
                     EUSCI_SPI_CLOCKSOURCE_SMCLK,    // SMCLK Clock Source
                     48000000,                       // SMCLK = 48MHZ
-                    baud,                           // SPICLK
+                    baud,                           // SPI clock
                     EUSCI_SPI_MSB_FIRST,            // MSB First
                     phase,                          // Phase
                     polarity,                       // Polarity
