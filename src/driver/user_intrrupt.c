@@ -1,7 +1,8 @@
 /*!
- * @file    my_interrupt.c
+ * Copyright (c) 2022, ErBW_s
+ * All rights reserved.
+ *
  * @author  Baohan, XieZhengYang
- * @date    2022/10/04
  */
 
 #include "user_intrrupt.h"

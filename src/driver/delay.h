@@ -1,7 +1,8 @@
 /*!
- * @file    delay.h
- * @author  zf, Baohan
- * @date    2022/05/25
+ * Copyright (c) 2022, ErBW_s
+ * All rights reserved.
+ *
+ * @author  SeekFree, Baohan
  */
 
 #ifndef _DELAY_H_

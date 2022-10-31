@@ -1,7 +1,8 @@
 /*!
- * @file    pwm.c
+ * Copyright (c) 2022, ErBW_s
+ * All rights reserved.
+ *
  * @author  Baohan
- * @date    2022/10/04
  */
 
 #include "pwm.h"

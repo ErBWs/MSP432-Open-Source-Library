@@ -1,7 +1,8 @@
 /*!
- * @file    baudrate_calculate.h
+ * Copyright (c) 2022, ErBW_s
+ * All rights reserved.
+ *
  * @author  TI, m-RNA, XieZhengYang, ErBW_s
- * @date    2022/10/04
  */
 
 #ifndef _BAUDRATE_CALCULATE_H

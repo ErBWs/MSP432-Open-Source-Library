@@ -1,7 +1,8 @@
 /*!
- * @file    isr.h
- * @author  Baohan
- * @date    2022/10/03
+ * Copyright (c) 2022, ErBW_s
+ * All rights reserved.
+ *
+ * @author  Baohan, XieZhengYang
  */
 
 #ifndef _ISR_H

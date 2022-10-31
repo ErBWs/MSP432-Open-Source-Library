@@ -1,7 +1,8 @@
 /*!
- * @file    baudrate_calculate.c
- * @author  TI, m-RNA, XieZhengYang, ErBW_s
- * @date    2022/10/04
+ * Copyright (c) 2022, ErBW_s
+ * All rights reserved.
+ *
+ * @author  TI, m-RNA, XieZhengYang, Baohan
  * @note    This code is converted from JavaScript in the online calculator from TI:
  *          https://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSP430BaudRateConverter/index.html
  *          There are some errors in the origin C code:

@@ -1,12 +1,13 @@
-/*
- * @file    easy_key.c
- * @author  ErBW_s
- * @date    2022/04/09
+/*!
+ * Copyright (c) 2022, ErBW_s
+ * All rights reserved.
+ *
+ * @author  Baohan
  */
 
 #include "easy_key.h"
 
-/*
+/*!
  * @brief       Callback
  * @param       *key        Key linked list
  * @return      void
@@ -42,7 +43,7 @@ __attribute__((weak)) void MultiClickCallback(EasyKey_t *key)
 
 
 EasyKey_t *head = NULL, *tail = NULL;
-/*
+/*!
  * @brief       Key linked list init
  * @param       key         Linked list's node
  * @param       pin         Gpio pin
@@ -80,7 +81,7 @@ void EasyKeyInit(EasyKey_t *key, uint_fast8_t _port, uint_fast16_t _pin, uint8_t
 }
 
 
-/*
+/*!
  * @brief       Key interrupt handler
  * @param       void
  * @return      void

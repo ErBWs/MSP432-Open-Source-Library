@@ -1,7 +1,8 @@
 /*!
- * @file    user_spi.h
+ * Copyright (c) 2022, ErBW_s
+ * All rights reserved.
+ *
  * @author  Baohan
- * @date    2022/10/12
  */
 
 #ifndef _USER_SPI_H

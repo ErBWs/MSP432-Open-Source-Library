@@ -1,7 +1,8 @@
-/*
- * @file    easy_key.h
- * @author  ErBW_s
- * @date    2022/04/09
+/*!
+ * Copyright (c) 2022, ErBW_s
+ * All rights reserved.
+ *
+ * @author  Baohan
  */
 
 #ifndef _easy_key_h_

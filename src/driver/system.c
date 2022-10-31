@@ -1,7 +1,8 @@
 /*!
- * @file    system_lint.c
- * @author  LX, Baohan
- * @date    2022/10/01
+ * Copyright (c) 2022, ErBW_s
+ * All rights reserved.
+ *
+ * @author  Baohan
  */
 
 #include "system.h"
