@@ -23,7 +23,7 @@
  *              }
  *              count = 0;
  */
-void EnableTimerInterrupt(TimerInterruptPinEnum _timer, uint_fast16_t period)
+void EnableTimerInterrupt(TimerInterruptEnum _timer, uint_fast16_t period)
 {
     uint_fast32_t userPeriod;
     uint_fast16_t timerAddress;
@@ -31,10 +31,8 @@ void EnableTimerInterrupt(TimerInterruptPinEnum _timer, uint_fast16_t period)
     if (_timer <= 3)
     {
         userPeriod = period - 1;
-        if (period > 64999)     // Cannot exceed 65ms
-        {
-            return;
-        }
+        Assert(userPeriod < 65000);     // Cannot exceed 65ms
+
         switch (_timer)
         {
             case TIM_A0_INT:
@@ -74,10 +72,8 @@ void EnableTimerInterrupt(TimerInterruptPinEnum _timer, uint_fast16_t period)
     } else if (_timer < 6)
     {
         userPeriod = period * 48 - 1;
-        if (period > 88999999)  // Cannot exceed 89s
-        {
-            return;
-        }
+        Assert(userPeriod < 89000000);      // Cannot exceed 89s
+
         switch (_timer)
         {
             case TIM32_1_INT:
@@ -99,7 +95,7 @@ void EnableTimerInterrupt(TimerInterruptPinEnum _timer, uint_fast16_t period)
         Interrupt_enableInterrupt(timerNumber);
     } else
     {
-        return;
+        Assert(0);      // Using wrong TimerInterruptEnum
     }
 }
 
@@ -107,17 +103,15 @@ void EnableTimerInterrupt(TimerInterruptPinEnum _timer, uint_fast16_t period)
 /*!
  * @brief       Enable external interrupt
  *
- * @param       port        See enum in my_interrupt.h
- * @param       pin         Trigger period, 1us ~ 65ms for TimerA and 1us ~ 89s for Timer32
+ * @param       port        GPIO port
+ * @param       pin         GPIO pin
  * @param       edge        fill this param with GPIO_HIGH_TO_LOW_TRANSITION or GPIO_LOW_TO_HIGH_TRANSITION
  * @return      None
  */
 void EnableExternalInterrupt(uint_fast8_t port, uint_fast16_t pin, uint_fast8_t edge)
 {
-    if (pin > 7)
-    {
-        return;
-    }
+    Assert(pin < 8);        // Using pin that msp432 don't have
+
     GPIO_setAsInputPinWithPullUpResistor(port, pin);
     GPIO_clearInterruptFlag(port, pin);
     GPIO_interruptEdgeSelect(port, pin, edge);

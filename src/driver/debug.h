@@ -8,8 +8,7 @@
 #ifndef _DEBUG_H
 #define _DEBUG_H
 
-#include <driverlib.h>
-#include "header.h"
+#include <stdint.h>
 
 void EnableAssert();
 void DisableAssert();

@@ -12,6 +12,8 @@
  *
  * @param       None
  * @return      None
+ *
+ * @note        Do not modify! Or you may permanently destroy the mcu
  */
 void SystemClockInit()
 {

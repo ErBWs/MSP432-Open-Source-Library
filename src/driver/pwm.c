@@ -90,8 +90,7 @@ void PwmInit(PwmChannelEnum _pin, const uint32_t freq, const uint_fast16_t duty)
  */
 void SetPwmDuty(PwmChannelEnum _pin, const uint_fast16_t duty)
 {
-    if (duty > PWM_DUTY_MAX)
-        return;
+    Assert(duty <= PWM_DUTY_MAX);       // Cannot output pwm duty that exceed PWM_DUTY_MAX
 
     // Get timer
     uint32_t timerA;

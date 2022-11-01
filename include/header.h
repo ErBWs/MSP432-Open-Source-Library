@@ -9,7 +9,7 @@
 
 #include "driverlib.h"
 
-// User common
+// User driver
 #include "driver/delay.h"
 #include "driver/system.h"
 #include "driver/user_intrrupt.h"
@@ -17,6 +17,7 @@
 #include "driver/user_spi.h"
 #include "driver/user_uart.h"
 #include "driver/shanwai.h"
+#include "driver/debug.h"
 
 // User peripheral
 #include "bsp/easy_key.h"

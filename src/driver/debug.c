@@ -50,7 +50,7 @@ void AssertHandler(uint8_t logic, char *file, int line)
 
     while (1)
     {
-        // Trap the program in infinite loop
+        // Trap the program in this infinite loop
         // and output error message on screen if screen is connected
 
     }
