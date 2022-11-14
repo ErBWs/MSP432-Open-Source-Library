@@ -2,24 +2,22 @@
 
 [English](./README_en.md)
 
-ÓÉErBW_sºÍ[SORMaker](https://github.com/SORMaker)Ò»Æð±àÐ´µÄmsp432p401rµÄ¿âº¯Êý
+æ¬¢è¿Žpull requestï¼Œä¸è¿‡è¯·ä¿æŒä»£ç é£Žæ ¼ä¸€è‡´ã€‚
 
-»¶Ó­pull request£¬²»¹ýÇë±£³Ö´úÂë·ç¸ñÒ»ÖÂ¡£
+> å¤–è®¾åº“æ”¾åœ¨ `/src/bsp` æ–‡ä»¶å¤¹å†…ï¼›
+> 
+> ä»£ç æ–‡ä»¶å‘½åé£Žæ ¼ï¼šå°å†™+ä¸‹åˆ’çº¿ `e.g. baudrate_calculate.c`ï¼›
+> 
+> å‡½æ•°å‘½åé£Žæ ¼ï¼šé¦–å­—æ¯å…¨éƒ¨å¤§å†™ï¼Œå°½é‡ä¸ç”¨ä¸‹åˆ’çº¿ `e.g. GetPinLevel()`ï¼›
+> 
+> å‡½æ•°å‘½åä¸‹åˆ’çº¿é€‚ç”¨æƒ…å†µï¼šåŒåå‡½æ•°ä½†æ˜¯å±žäºŽä¸åŒçš„å¤–è®¾åº“ï¼Œæ¯”å¦‚ä¸åŒå±å¹•çš„æ˜¾ç¤ºå‡½æ•°ï¼Œ
+> 
+> æˆ–è€…å¦‚å®˜æ–¹åº“é‚£æ ·ä»¥å‡½æ•°ä½œç”¨æ¥å‘½åï¼Œåç§°å¾ˆé•¿ä¸”è¦è¡¨æ˜Žæ˜¯å“ªä¸ªåº“çš„å‡½æ•°ï¼ˆè¯·å°½é‡é¿å…è¿™ç§æƒ…å†µï¼‰ï¼Œ
+> 
+> `e.g. TFT180_DisplayUint(), IPS200_DisplayUint()`ï¼Œ
+> 
+> `GPIO_SetAsInputPinWithPullDownResistor()`ï¼›
+> 
+> å˜é‡åå‘½åé£Žæ ¼: ç¬¬ä¸€ä¸ªé¦–å­—æ¯å°å†™ï¼ŒåŽé¢éƒ½å¤§å†™ `e.g. baudRate`ï¼›
 
-> ÍâÉè¿â·ÅÔÚ `/src/bsp` ÎÄ¼þ¼ÐÄÚ£»
-> 
-> ´úÂëÎÄ¼þÃüÃû·ç¸ñ£ºÐ¡Ð´+ÏÂ»®Ïß `e.g. baudrate_calculate.c`£»
-> 
-> º¯ÊýÃüÃû·ç¸ñ£ºÊ××ÖÄ¸È«²¿´óÐ´£¬¾¡Á¿²»ÓÃÏÂ»®Ïß `e.g. GetPinLevel()`£»
-> 
-> º¯ÊýÃüÃûÏÂ»®ÏßÊÊÓÃÇé¿ö£ºÍ¬Ãûº¯Êýµ«ÊÇÊôÓÚ²»Í¬µÄÍâÉè¿â£¬±ÈÈç²»Í¬ÆÁÄ»µÄÏÔÊ¾º¯Êý£¬
-> 
-> »òÕßÈç¹Ù·½¿âÄÇÑùÒÔº¯Êý×÷ÓÃÀ´ÃüÃû£¬Ãû³ÆºÜ³¤ÇÒÒª±íÃ÷ÊÇÄÄ¸ö¿âµÄº¯Êý£¨Çë¾¡Á¿±ÜÃâÕâÖÖÇé¿ö£©£¬
-> 
-> `e.g. TFT180_DisplayUint(), IPS200_DisplayUint()`£¬
-> 
-> `GPIO_SetAsInputPinWithPullDownResistor()`£»
-> 
-> ±äÁ¿ÃûÃüÃû·ç¸ñ: µÚÒ»¸öÊ××ÖÄ¸Ð¡Ð´£¬ºóÃæ¶¼´óÐ´ `e.g. baudRate`£»
-
-Èç¹û´úÂë·ç¸ñ²»Ò»ÖÂµÄpull request²»»á±»ÍË»Øµ«ÊÇ»á±»ÎÒÐÞ¸Ä´úÂë·ç¸ñ
+å¦‚æžœä»£ç é£Žæ ¼ä¸ä¸€è‡´çš„pull requestä¸ä¸€å®šä¼šè¢«é€€å›žä½†æ˜¯ä¼šè¢«æˆ‘ä¿®æ”¹ä»£ç é£Žæ ¼
