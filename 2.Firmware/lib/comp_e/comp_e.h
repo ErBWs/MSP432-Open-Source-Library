@@ -235,16 +235,16 @@ extern bool COMP_E_initModule(uint32_t comparator, const COMP_E_Config *config);
 //!        - \b COMP_E_VREFBASE2_0V
 //!        - \b COMP_E_VREFBASE2_5V
 //! \param upperLimitSupplyVoltageFractionOf32 is the numerator of the
-//!       equation to generate the reference voltage for the upper limit
+//!       equation to generate the reference voltage for the upper outputLimit
 //!       reference voltage. Valid values are between 1 and 32.
 //! \param lowerLimitSupplyVoltageFractionOf32 is the numerator of the
-//!       equation to generate the reference voltage for the lower limit
+//!       equation to generate the reference voltage for the lower outputLimit
 //!       reference voltage. Valid values are between 1 and 32.
 //!  <br>Modified bits are \b CEREF0 of \b CECTL2 register.
 //!
 //! Use this function to generate a voltage to serve as a reference to the
 //! terminal selected at initialization. The voltage is determined by the
-//! equation: Vbase * (Numerator / 32). If the upper and lower limit voltage
+//! equation: Vbase * (Numerator / 32). If the upper and lower outputLimit voltage
 //! numerators are equal, then a static reference is defined, whereas they are
 //! different then a hysteresis effect is generated.
 //!

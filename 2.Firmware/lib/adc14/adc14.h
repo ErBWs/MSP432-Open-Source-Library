@@ -638,8 +638,8 @@ extern bool ADC14_disableComparatorWindow(uint32_t memorySelect);
 //!         value. Possible values include:
 //!         \b ADC_COMP_WINDOW0 [DEFAULT]
 //!         \b ADC_COMP_WINDOW1
-//! \param low is the lower limit of the window comparator
-//! \param high is the upper limit of the window comparator
+//! \param low is the lower outputLimit of the window comparator
+//! \param high is the upper outputLimit of the window comparator
 //!
 //! \return false if setting fails due to an in progress conversion
 //!
@@ -814,10 +814,10 @@ extern bool ADC14_disableSampleTimer(void);
 //!                          register is either greater than the ADCLO or
 //!                          lower than the ADCHI threshold.
 //!        - \b ADC_LO_INT - Interrupt enable for the falling short of the
-//!                          lower limit interrupt of the window comparator for
+//!                          lower outputLimit interrupt of the window comparator for
 //!                          the result register.
 //!        - \b ADC_HI_INT - Interrupt enable for the exceeding the upper
-//!                          limit of the window comparator for the result
+//!                          outputLimit of the window comparator for the result
 //!                          register.
 //!        - \b ADC_OV_INT - Interrupt enable for a conversion that is about
 //!                          to save to a memory buffer that has not been read
@@ -851,10 +851,10 @@ extern void ADC14_enableInterrupt(uint_fast64_t mask);
 //!                          register is either greater than the ADCLO or
 //!                          lower than the ADCHI threshold.
 //!        - \b ADC_LO_INT - Interrupt enable for the falling short of the
-//!                          lower limit interrupt of the window comparator for
+//!                          lower outputLimit interrupt of the window comparator for
 //!                          the result register.
 //!        - \b ADC_HI_INT - Interrupt enable for the exceeding the upper
-//!                          limit of the window comparator for the result
+//!                          outputLimit of the window comparator for the result
 //!                          register.
 //!        - \b ADC_OV_INT - Interrupt enable for a conversion that is about
 //!                          to save to a memory buffer that has not been read
@@ -885,10 +885,10 @@ extern void ADC14_disableInterrupt(uint_fast64_t mask);
 //!                          register is either greater than the ADCLO or
 //!                          lower than the ADCHI threshold.
 //!        - \b ADC_LO_INT - Interrupt enable for the falling short of the
-//!                          lower limit interrupt of the window comparator for
+//!                          lower outputLimit interrupt of the window comparator for
 //!                          the result register.
 //!        - \b ADC_HI_INT - Interrupt enable for the exceeding the upper
-//!                          limit of the window comparator for the result
+//!                          outputLimit of the window comparator for the result
 //!                          register.
 //!        - \b ADC_OV_INT - Interrupt enable for a conversion that is about
 //!                          to save to a memory buffer that has not been read
@@ -921,10 +921,10 @@ extern uint_fast64_t ADC14_getInterruptStatus(void);
 //!                          register is either greater than the ADCLO or
 //!                          lower than the ADCHI threshold.
 //!        - \b ADC_LO_INT - Interrupt enable for the falling short of the
-//!                          lower limit interrupt of the window comparator for
+//!                          lower outputLimit interrupt of the window comparator for
 //!                          the result register.
 //!        - \b ADC_HI_INT - Interrupt enable for the exceeding the upper
-//!                          limit of the window comparator for the result
+//!                          outputLimit of the window comparator for the result
 //!                          register.
 //!        - \b ADC_OV_INT - Interrupt enable for a conversion that is about
 //!                          to save to a memory buffer that has not been read
@@ -955,10 +955,10 @@ extern uint_fast64_t ADC14_getEnabledInterruptStatus(void);
 //!                          register is either greater than the ADCLO or
 //!                          lower than the ADCHI threshold.
 //!        - \b ADC_LO_INT - Interrupt enable for the falling short of the
-//!                          lower limit interrupt of the window comparator for
+//!                          lower outputLimit interrupt of the window comparator for
 //!                          the result register.
 //!        - \b ADC_HI_INT - Interrupt enable for the exceeding the upper
-//!                          limit of the window comparator for the result
+//!                          outputLimit of the window comparator for the result
 //!                          register.
 //!        - \b ADC_OV_INT - Interrupt enable for a conversion that is about
 //!                          to save to a memory buffer that has not been read

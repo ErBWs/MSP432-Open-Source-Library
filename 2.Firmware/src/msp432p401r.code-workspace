@@ -1,0 +1,19 @@
+{
+	"folders": [
+		{
+			"name": "msp432p401r",
+			"path": ".."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"header.h": "c",
+			"driverlib.h": "c",
+			"eusci.h": "c",
+			"isr.h": "c",
+			"interrupt.h": "c",
+			"cstdint": "c",
+			"stdint.h": "c"
+		}
+	}
+}
