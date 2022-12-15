@@ -10,7 +10,7 @@ set(CMAKE_SYSTEM_NAME Generic)
 set(CMAKE_C_COMPILER_WORKS 1)
 set(CMAKE_CXX_COMPILER_WORKS 1)
 
-project("MSP432P401R" C CXX)
+project("msp432p401r" C CXX)
 
 include(CMakeListsPrivate.txt)
 
