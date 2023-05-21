@@ -5,8 +5,8 @@
  * @author  Baohan
  */
 
-#ifndef _USER_SPI_H
-#define _USER_SPI_H
+#ifndef USER_SPI_H
+#define USER_SPI_H
 
 #include <driverlib.h>
 #include "header.h"
@@ -22,7 +22,7 @@ typedef enum
     SPI_B1_CLK_P63      = 0x5063,       // 0x 5[eUSCIB1] 0[AF0] 6[PORT6] 3[PIN3]
     SPI_B2_CLK_P35      = 0x6035,       // 0x 6[eUSCIB2] 0[AF0] 3[PORT3] 5[PIN5]
     SPI_B3_CLK_P101     = 0x70A1,       // 0x 7[eUSCIB3] 0[AF0] A[PORT10] 1[PIN1]
-}SpiClkPinEnum;
+}SpiClkPin_e;
 
 typedef enum
 {
@@ -36,7 +36,7 @@ typedef enum
     SPI_B2_MOSI_P36     = 0x6036,       // 0x 6[eUSCIB2] 0[AF0] 3[PORT3] 6[PIN6]
     SPI_B3_MOSI_P66     = 0x7166,       // 0x 7[eUSCIB3] 1[AF1] 6[PORT6] 6[PIN6]
     SPI_B3_MOSI_P102    = 0x70A2,       // 0x 7[eUSCIB3] 0[AF0] A[PORT10] 2[PIN2]
-}SpiMosiPinEnum;
+}SpiMosiPin_e;
 
 typedef enum
 {
@@ -52,7 +52,7 @@ typedef enum
     SPI_B2_MISO_P37     = 0x6037,       // 0x 6[eUSCIB2] 0[AF0] 3[PORT3] 7[PIN7]
     SPI_B3_MISO_P67     = 0x7167,       // 0x 7[eUSCIB3] 1[AF1] 6[PORT6] 7[PIN7]
     SPI_B3_MISO_P103    = 0x70A3,       // 0x 7[eUSCIB3] 0[AF0] A[PORT10] 3[PIN3]
-}SpiMisoPinEnum;
+}SpiMisoPin_e;
 
 typedef enum
 {
@@ -68,7 +68,7 @@ typedef enum
     SPI_B2_CS_P34       = 0x6034,       // 0x 6[eUSCIB2] 0[AF0] 3[PORT3] 4[PIN4]
     SPI_B3_CS_P80       = 0x7080,       // 0x 7[eUSCIB3] 0[AF0] 8[PORT8] 0[PIN0]
     SPI_B3_CS_P100      = 0x70A0,       // 0x 7[eUSCIB3] 0[AF0] A[PORT10] 0[PIN0]
-}SpiCsPinEnum;
+}SpiCsPin_e;
 
 typedef enum
 {
@@ -76,7 +76,7 @@ typedef enum
     SPI_MODE1,          // Low pin level while inactive and data changed on SCK 1st edge, captured on 2nd edge
     SPI_MODE2,          // High pin level while inactive and data captured on SCK 1st edge, changed on 2nd edge
     SPI_MODE3,          // High pin level while inactive and data changed on SCK 1st edge, captured on 2nd edge
-}SpiModeEnum;
+}SpiMode_e;
 
 typedef enum
 {
@@ -84,8 +84,14 @@ typedef enum
 
     SPI_CS_MODE0,       // CS high pin level activate
     SPI_CS_MODE1,       // CS low pin level activate
-}SpiCsModeEnum;
+}SpiCsMode_e;
 
-void SpiInit(SpiModeEnum _mode, SpiCsModeEnum _csMode, uint32_t baud, SpiClkPinEnum _clkPin, SpiMosiPinEnum _mosiPin, SpiMisoPinEnum _misoPin, SpiCsPinEnum _csPin);
+void SPI_Init(SpiMode_e _mode, SpiCsMode_e _csMode, uint32_t baud, SpiClkPin_e _clkPin, SpiMosiPin_e _mosiPin, SpiMisoPin_e _misoPin, SpiCsPin_e _csPin);
+
+void SPI_Send8BitData(uint32_t module, uint_fast8_t data);
+void SPI_Send8BitArray(uint32_t module, uint_fast8_t *data, uint32_t len);
+
+void SPI_Send16BitData(uint32_t module, uint_fast8_t data);
+void SPI_Send16BitArray(uint32_t module, uint_fast8_t *data, uint32_t len);
 
 #endif

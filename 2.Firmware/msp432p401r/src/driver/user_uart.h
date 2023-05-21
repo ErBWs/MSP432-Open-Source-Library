@@ -1,9 +1,30 @@
-#ifndef _UART_H
-#define _UART_H
+/*!
+ * Copyright (c) 2023, ErBW_s
+ * All rights reserved.
+ *
+ * @author  Baohan, XieZhengYang
+ */
+
+#ifndef user_uart_h
+#define user_uart_h
+
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
 #include <driverlib.h>
+#include <stdio.h>
+#include <string.h>
+#include "baudrate_calculate.h"
 
-#define  UART_PutChar( moduleInstance, transmitData)  UART_transmitData( moduleInstance,  transmitData)
+void UART_Init(uint32_t module, uint32_t baudRate);
 
-void UART_PutNChar(uint32_t moduleInstance, uint8_t *transmitData, uint16_t datalength);
+void UART_Send8BitData(uint32_t module, uint8_t data);
+void UART_Send8BitArray(uint32_t module, uint8_t *data, uint32_t len);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

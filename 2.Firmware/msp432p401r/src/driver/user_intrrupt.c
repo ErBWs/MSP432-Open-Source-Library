@@ -23,7 +23,7 @@
  *              }
  *              count = 0;
  */
-void EnableTimerInterrupt(TimerInterruptEnum _timer, uint_fast16_t period)
+void EnableTimerInterrupt(TimerInterrupt_e _timer, uint_fast16_t period)
 {
     uint_fast32_t userPeriod;
     uint_fast16_t timerAddress;
@@ -35,24 +35,24 @@ void EnableTimerInterrupt(TimerInterruptEnum _timer, uint_fast16_t period)
 
         switch (_timer)
         {
-            case TIM_A0_INT:
-                timerAddress = TIMER_A0_BASE;
-                timerNumber = INT_TA0_0;
-                break;
-            case TIM_A1_INT:
-                timerAddress = TIMER_A1_BASE;
-                timerNumber = INT_TA1_0;
-                break;
-            case TIM_A2_INT:
-                timerAddress = TIMER_A2_BASE;
-                timerNumber = INT_TA2_0;
-                break;
-            case TIM_A3_INT:
-                timerAddress = TIMER_A3_BASE;
-                timerNumber = INT_TA3_0;
-                break;
-            default:
-                return;
+        case TIM_A0_INT:
+            timerAddress = TIMER_A0_BASE;
+            timerNumber = INT_TA0_0;
+            break;
+        case TIM_A1_INT:
+            timerAddress = TIMER_A1_BASE;
+            timerNumber = INT_TA1_0;
+            break;
+        case TIM_A2_INT:
+            timerAddress = TIMER_A2_BASE;
+            timerNumber = INT_TA2_0;
+            break;
+        case TIM_A3_INT:
+            timerAddress = TIMER_A3_BASE;
+            timerNumber = INT_TA3_0;
+            break;
+        default:
+            return;
         }
 
         Timer_A_UpModeConfig upConfig =
@@ -76,16 +76,16 @@ void EnableTimerInterrupt(TimerInterruptEnum _timer, uint_fast16_t period)
 
         switch (_timer)
         {
-            case TIM32_1_INT:
-                timerAddress = TIMER32_0_BASE;
-                timerNumber = INT_T32_INT1;
-                break;
-            case TIM32_2_INT:
-                timerAddress = TIMER32_1_BASE;
-                timerNumber = INT_T32_INT2;
-                break;
-            default:
-                return;
+        case TIM32_1_INT:
+            timerAddress = TIMER32_0_BASE;
+            timerNumber = INT_T32_INT1;
+            break;
+        case TIM32_2_INT:
+            timerAddress = TIMER32_1_BASE;
+            timerNumber = INT_T32_INT2;
+            break;
+        default:
+            return;
         }
 
         Timer32_initModule(timerAddress, TIMER32_PRESCALER_1, TIMER32_32BIT, TIMER32_PERIODIC_MODE);
@@ -95,7 +95,7 @@ void EnableTimerInterrupt(TimerInterruptEnum _timer, uint_fast16_t period)
         Interrupt_enableInterrupt(timerNumber);
     } else
     {
-        Assert(0);      // Using wrong TimerInterruptEnum
+        Assert(0);      // Using wrong TimerInterrupt_e
     }
 }
 
@@ -123,7 +123,6 @@ void EnableExternalInterrupt(uint_fast8_t port, uint_fast16_t pin, uint_fast8_t 
 /*!
  * @brief       Init Uart interrupt
  * @param       module          Fill this with EUSCI_A0_BASE, EUSCI_A1_BASE, EUSCI_A2_BASE or EUSCI_A3_BASE
- * @param       baudRate        Default is 115200
  * @param       status          Fill this with EUSCI_A_UART_RECEIVE_INTERRUPT
  *                                             EUSCI_A_UART_TRANSMIT_INTERRUPT
  *                                             EUSCI_A_UART_RECEIVE_ERRONEOUSCHAR_INTERRUPT
@@ -133,84 +132,27 @@ void EnableExternalInterrupt(uint_fast8_t port, uint_fast16_t pin, uint_fast8_t 
  * @note        Note the pin definition: Ax(RXD|TXD)
  *              A0(P1.2|P1.3) A1(P2.2|P2.3) A2(P3.2|P3.3) A3(P9.6|P9.7)
  */
-void EnableUartInterrupt(uint32_t module, uint32_t baudRate, uint16_t status)
+void EnableUartInterrupt(uint32_t module, uint16_t status)
 {
-#ifdef EUSCI_A_UART_7_BIT_LEN       // If using new version of sdk
-    const eUSCI_UART_ConfigV1 uartConfig =
-            {
-                    EUSCI_A_UART_CLOCKSOURCE_SMCLK,                // SMCLK Clock Source
-                    26,                                            // BRDIV = 26
-                    0,                                             // UCxBRF = 0
-                    111,                                           // UCxBRS = 111
-                    EUSCI_A_UART_NO_PARITY,                        // No Parity
-                    EUSCI_A_UART_LSB_FIRST,                        // MSB First
-                    EUSCI_A_UART_ONE_STOP_BIT,                     // One stop bit
-                    EUSCI_A_UART_MODE,                             // UART mode
-                    EUSCI_A_UART_OVERSAMPLING_BAUDRATE_GENERATION, // Oversampling
-                    EUSCI_A_UART_8_BIT_LEN                         // 8 bit data length
-            };
-    ConfigBaudRate((eUSCI_UART_ConfigV1 *) &uartConfig, baudRate); // Set baud rate
-#else       // If using old version of sdk
-    const eUSCI_UART_Config uartConfig =
-        {
-            EUSCI_A_UART_CLOCKSOURCE_SMCLK,                // SMCLK Clock Source
-            26,                                            // BRDIV = 26
-            0,                                             // UCxBRF = 0
-            111,                                           // UCxBRS = 111
-            EUSCI_A_UART_NO_PARITY,                        // No Parity
-            EUSCI_A_UART_LSB_FIRST,                        // MSB First
-            EUSCI_A_UART_ONE_STOP_BIT,                     // One stop bit
-            EUSCI_A_UART_MODE,                             // UART mode
-            EUSCI_A_UART_OVERSAMPLING_BAUDRATE_GENERATION, // Oversampling
-        };
-    eusci_calcBaudDividers((eUSCI_UART_Config *)&uartConfig, baudRate); // Set baud rate
-#endif
-
-    uint_fast8_t port;
-    uint_fast16_t pin;
     uint32_t interruptNum;
 
-    switch (module)
-    {
-        case EUSCI_A0_BASE:
-            port = GPIO_PORT_P1;
-            pin = GPIO_PIN2 | GPIO_PIN3;
-            break;
-        case EUSCI_A1_BASE:
-            port = GPIO_PORT_P2;
-            pin = GPIO_PIN2 | GPIO_PIN3;
-            break;
-        case EUSCI_A2_BASE:
-            port = GPIO_PORT_P3;
-            pin = GPIO_PIN2 | GPIO_PIN3;
-            break;
-        case EUSCI_A3_BASE:
-            port = GPIO_PORT_P9;
-            pin = GPIO_PIN6 | GPIO_PIN7;
-            break;
-        default:
-            return;
-    }
-    GPIO_setAsPeripheralModuleFunctionOutputPin(port, pin, GPIO_PRIMARY_MODULE_FUNCTION);
-    UART_initModule(module, &uartConfig);
-    UART_enableModule(module);
     UART_enableInterrupt(module, status);
     switch (module)
     {
-        case EUSCI_A0_BASE:
-            interruptNum = INT_EUSCIA0;
-            break;
-        case EUSCI_A1_BASE:
-            interruptNum = INT_EUSCIA1;
-            break;
-        case EUSCI_A2_BASE:
-            interruptNum = INT_EUSCIA2;
-            break;
-        case EUSCI_A3_BASE:
-            interruptNum = INT_EUSCIA3;
-            break;
-        default:
-            return;
+    case EUSCI_A0_BASE:
+        interruptNum = INT_EUSCIA0;
+        break;
+    case EUSCI_A1_BASE:
+        interruptNum = INT_EUSCIA1;
+        break;
+    case EUSCI_A2_BASE:
+        interruptNum = INT_EUSCIA2;
+        break;
+    case EUSCI_A3_BASE:
+        interruptNum = INT_EUSCIA3;
+        break;
+    default:
+        return;
     }
     Interrupt_enableInterrupt(interruptNum);
 }

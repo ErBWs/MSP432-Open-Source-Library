@@ -17,10 +17,10 @@
  *
  * @note        You cannot initialize different function on the same Timer
  *              e.g. You cannot initialize TimerA_0 as interrupt and pwm at the same time
- * @example     PwmInit(TMA0_PWM_CH2_P25, 50, 5000);
+ * @example     PWM_Init(TMA0_PWM_CH2_P25, 50, 5000);
  *              Initialize TimerA0, P2_5 as pwm output, with 50 frequency and 5000 initial duty
  */
-void PwmInit(PwmChannelEnum _pin, const uint32_t freq, const uint_fast16_t duty)
+void PWM_Init(PwmChannel_e _pin, const uint32_t freq, const uint_fast16_t duty)
 {
     // GPIO initialization
     uint_fast16_t pin;
@@ -88,7 +88,7 @@ void PwmInit(PwmChannelEnum _pin, const uint32_t freq, const uint_fast16_t duty)
  * @param       duty        Pwm duty
  * @return      None
  */
-void SetPwmDuty(PwmChannelEnum _pin, const uint_fast16_t duty)
+void PWM_SetDuty(PwmChannel_e _pin, const uint_fast16_t duty)
 {
     Assert(duty <= PWM_DUTY_MAX);       // Cannot output pwm duty that exceed PWM_DUTY_MAX
 
@@ -115,4 +115,31 @@ void SetPwmDuty(PwmChannelEnum _pin, const uint_fast16_t duty)
 
     // Change pwm duty
     Timer_A_setCompareValue(timerA, channel,duty);
+}
+
+
+/*!
+ * @brief       Change pwm frequency
+ *
+ * @param       _pin        See the typedef in pwm.h
+ * @param       duty        Pwm duty
+ * @return      None
+ */
+void PWM_SetFreq(PwmChannel_e _pin, const uint32_t freq)
+{
+    // Get timer
+    uint32_t timerA;
+    switch ((_pin & 0xF0000) >> 16)
+    {
+        case 0: timerA = TIMER_A0_BASE;      break;
+        case 1: timerA = TIMER_A1_BASE;      break;
+        case 2: timerA = TIMER_A2_BASE;      break;
+        case 3: timerA = TIMER_A3_BASE;      break;
+    }
+
+    // Get Timer period
+    uint32_t arr = 1000000 / freq - 1;
+
+    // Change pwm frequency
+    TIMER_A_CMSIS(timerA)->CCR[0] = arr;
 }

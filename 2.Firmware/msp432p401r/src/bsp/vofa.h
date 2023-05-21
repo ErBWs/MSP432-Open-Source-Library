@@ -5,8 +5,8 @@
  * @author  Baohan
  */
 
-#ifndef MM32F527X_E9P_VOFA_H
-#define MM32F527X_E9P_VOFA_H
+#ifndef VOFA_H
+#define VOFA_H
 
 #ifdef __cplusplus
 extern "C"
@@ -14,14 +14,15 @@ extern "C"
 #endif
 
 #include <stdint.h>
-#include "zf_driver_uart.h"
+#include "common.h"
+#include "driver/user_uart.h"
 
 #define CHANNEL_NUM     3
+#define VOFA_UART       EUSCI_A0_BASE
 
 extern float vofaData[CHANNEL_NUM];
 
-void VofaLittleEndianSendFrame();
-void VofaBigEndianSendFrame();
+void VofaSendFrame();
 
 #ifdef __cplusplus
 }

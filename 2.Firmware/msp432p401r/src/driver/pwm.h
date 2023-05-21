@@ -38,9 +38,9 @@ typedef enum
     TMA3_PWM_CH2_P82    =0x32082,        // 0x 3[TimerA3] 2[CH2] 0[AF0] 8[PORT8] 2[PIN2]
     TMA3_PWM_CH3_P92    =0x33092,        // 0x 3[TimerA3] 3[CH3] 0[AF0] 9[PORT9] 2[PIN2]
     TMA3_PWM_CH4_P93    =0x34093,        // 0x 3[TimerA3] 4[CH4] 0[AF0] 9[PORT9] 3[PIN3]
-}PwmChannelEnum;
+}PwmChannel_e;
 
-void PwmInit(PwmChannelEnum _pin, const uint32_t freq, const uint_fast16_t duty);
-void SetPwmDuty(PwmChannelEnum _pin, const uint_fast16_t duty);
+void PWM_Init(PwmChannel_e _pin, const uint32_t freq, const uint_fast16_t duty);
+void PWM_SetDuty(PwmChannel_e _pin, const uint_fast16_t duty);
 
 #endif
