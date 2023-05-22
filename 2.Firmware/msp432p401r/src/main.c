@@ -14,15 +14,15 @@ int main(void)
 
     // Enable global interrupt
     Interrupt_enableMaster();
-//    float temp = 0;
+    float temp = 0;
 
     while (1)
     {
         GPIO_toggleOutputOnPin(GPIO_PORT_P1, GPIO_PIN0);
 //        vofaData[0] = sinf(temp);
-//        temp += 0.1f;
+        temp += 0.1f;
 //        VofaSendFrame();
-//        printf("hello");
+        printf("sin: %f\n", sinf(temp));
         Delay_ms(100);
     }
 }

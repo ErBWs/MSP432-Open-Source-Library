@@ -3,6 +3,10 @@
  * All rights reserved.
  * 
  * @author  Baohan
+ *
+ * @note    VOFA+ in macOS have some issue with FireWater,
+ *          to use FireWater you need to remain 'sample: '
+ *          for it to successfully analyze data.
  */
 
 #include "vofa.h"

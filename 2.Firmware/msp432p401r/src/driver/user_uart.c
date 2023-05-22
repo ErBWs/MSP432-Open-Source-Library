@@ -7,43 +7,20 @@
 
 #include "user_uart.h"
 
-
 /*!
  * @brief   Printf redirection
  *
  * @note    Do not Modify!
  */
-#if defined(__ICCARM__)
-#define PUTCHAR_PROTOTYPE int32_t fputc (int32_t ch, FILE *f)
-#define GETCHAR_PROTOTYPE int32_t fgetc (FILE *f)
-#elif defined(__GNUC__)
-#define PUTCHAR_PROTOTYPE int32_t __io_putchar (int32_t ch)
-#define GETCHAR_PROTOTYPE int32_t __io_getchar ()
-#endif
-
-#if defined(__ICCARM__)
-PUTCHAR_PROTOTYPE
+int _write(int fd, char *buf, int size)
 {
-    uart_write_byte(DEBUG_UART_INDEX, (ch & 0xFF));
-    return ch;
+    int i;
+    for(i=0; i<size; i++)
+    {
+        UART_transmitData(EUSCI_A0_BASE, *buf++);
+    }
+    return size;
 }
-
-GETCHAR_PROTOTYPE
-{
-    return uart_read_byte(DEBUG_UART_INDEX);
-}
-#else
-int fputc (int ch, FILE* f)
-{
-    UART_transmitData(EUSCI_A0_BASE, (ch & 0xFF));
-    return ch;
-}
-
-int fgetc(FILE *f)
-{
-    return UART_receiveData(EUSCI_A0_BASE);
-}
-#endif
 
 /*!
  * @brief   Init UART module
