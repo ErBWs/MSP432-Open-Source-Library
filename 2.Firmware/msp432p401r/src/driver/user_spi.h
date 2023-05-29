@@ -91,7 +91,7 @@ void SPI_Init(SpiMode_e _mode, SpiCsMode_e _csMode, uint32_t baud, SpiClkPin_e _
 void SPI_Send8BitData(uint32_t module, uint_fast8_t data);
 void SPI_Send8BitArray(uint32_t module, uint_fast8_t *data, uint32_t len);
 
-void SPI_Send16BitData(uint32_t module, uint_fast8_t data);
-void SPI_Send16BitArray(uint32_t module, uint_fast8_t *data, uint32_t len);
+void SPI_Send16BitData(uint32_t module, uint_fast16_t data);
+void SPI_Send16BitArray(uint32_t module, uint_fast16_t *data, uint32_t len);
 
 #endif

@@ -236,21 +236,21 @@ void SPI_Send8BitArray(uint32_t module, uint_fast8_t *data, uint32_t len)
     }
 }
 
-void SPI_Send16BitData(uint32_t module, uint_fast8_t data)
+void SPI_Send16BitData(uint32_t module, uint_fast16_t data)
 {
     SPI_transmitData(module, (uint8_t) (data & 0xFF00) >> 8);
     while (SPI_isBusy(module));
-    SPI_transmitData(module, (uint8_t) (data & 0x00FF) >> 8);
+    SPI_transmitData(module, (uint8_t) (data & 0x00FF));
     while (SPI_isBusy(module));
 }
 
-void SPI_Send16BitArray(uint32_t module, uint_fast8_t *data, uint32_t len)
+void SPI_Send16BitArray(uint32_t module, uint_fast16_t *data, uint32_t len)
 {
     while (len--)
     {
         SPI_transmitData(module, (uint8_t) (*data & 0xFF00) >> 8);
         while (SPI_isBusy(module));
-        SPI_transmitData(module, (uint8_t) (*data++ & 0x00FF) >> 8);
+        SPI_transmitData(module, (uint8_t) (*data++ & 0x00FF));
         while (SPI_isBusy(module));
     }
 }

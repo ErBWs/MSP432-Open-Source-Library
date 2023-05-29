@@ -17,6 +17,7 @@
 #include "driver/user_uart.h"
 
 // User peripheral
+#include "bsp/zf_device_ips114.h"
 #include "bsp/vofa.h"
 
 // User code

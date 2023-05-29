@@ -11,6 +11,8 @@ int main(void)
 //    EnableUartInterrupt(EUSCI_A0_BASE, EUSCI_A_UART_RECEIVE_INTERRUPT);
 //    EnableUartInterrupt(EUSCI_A0_BASE, EUSCI_A_UART_TRANSMIT_INTERRUPT);
     GPIO_setAsOutputPin(GPIO_PORT_P1, GPIO_PIN0);
+    ips114_init();
+    ips114_show_string(0, 0, "hello");
 
     // Enable global interrupt
     Interrupt_enableMaster();
@@ -20,9 +22,10 @@ int main(void)
     {
         GPIO_toggleOutputOnPin(GPIO_PORT_P1, GPIO_PIN0);
 //        vofaData[0] = sinf(temp);
-        temp += 0.1f;
+//        temp += 0.1f;
 //        VofaSendFrame();
-        printf("sin: %f\n", sinf(temp));
+//        printf("sin: %f\n", sinf(temp));
+
         Delay_ms(100);
     }
 }

@@ -32,4 +32,8 @@ void SystemClockInit()
     // Enable FPU
     FPU_enableModule();
     FPU_enableLazyStacking();
+
+    P4->DIR |= BIT3;
+    P4->SEL0 |=BIT3;                        // Output MCLK
+    P4->SEL1 &= ~(BIT3);
 }
