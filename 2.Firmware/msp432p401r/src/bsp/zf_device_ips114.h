@@ -55,7 +55,7 @@
 #include "driver/user_spi.h"
 #include "common_font.h"
 
-#define IPS114_SPI_SPEED                (24 * 1000 * 1000)                      // 硬件 SPI 速率 这里设置为系统时钟二分频
+#define IPS114_SPI_SPEED                (20 * 1000 * 1000)                      // 硬件 SPI 速率 这里设置为系统时钟二分频
 #define IPS114_SPI                      (EUSCI_B0_BASE)
 #define IPS114_SCL_PIN                  (SPI_B0_CLK_P15)                           // 硬件 SPI SCK 引脚
 #define IPS114_SDA_PIN                  (SPI_B0_MOSI_P16)                          // 硬件 SPI MOSI 引脚
@@ -70,8 +70,8 @@
 #define IPS114_BLK_PIN                  (GPIO_PIN6 )                                   // 液晶背光引脚定义
 
 #define IPS114_DEFAULT_DISPLAY_DIR      (IPS114_CROSSWISE)                  // 默认的显示方向
-#define IPS114_DEFAULT_PENCOLOR         (RGB565_RED)                            // 默认的画笔颜色
-#define IPS114_DEFAULT_BGCOLOR          (RGB565_WHITE)                          // 默认的背景颜色
+#define IPS114_DEFAULT_PENCOLOR         (RGB565_WHITE)                            // 默认的画笔颜色
+#define IPS114_DEFAULT_BGCOLOR          (RGB565_BLACK)                          // 默认的背景颜色
 #define IPS114_DEFAULT_DISPLAY_FONT     (IPS114_8X16_FONT)                      // 默认的字体模式
 
 #define IPS114_DC(x)                    ((x) ? (GPIO_setOutputHighOnPin(IPS114_DC_PORT, IPS114_DC_PIN)) : (GPIO_setOutputLowOnPin(IPS114_DC_PORT, IPS114_DC_PIN)))

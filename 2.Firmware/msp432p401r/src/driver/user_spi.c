@@ -208,26 +208,27 @@ void SPI_Init(SpiMode_e _mode, SpiCsMode_e _csMode, uint32_t baud, SpiClkPin_e _
 
 
 /*!
- * @brief   Spi send data
+ * @brief   Spi data process
  *
- * @param   module      Filled with EUSCI_A0_BASE
-                                    EUSCI_A1_BASE
-                                    EUSCI_A2_BASE
-                                    EUSCI_A3_BASE
-                                    EUSCI_B0_BASE
-                                    EUSCI_B1_BASE
-                                    EUSCI_B2_BASE
-                                    EUSCI_B3_BASE
- * @param   data        8 bit data
- * @param   len         Array length
+ * @param   module          Filled with EUSCI_A0_BASE
+                                        EUSCI_A1_BASE
+                                        EUSCI_A2_BASE
+                                        EUSCI_A3_BASE
+                                        EUSCI_B0_BASE
+                                        EUSCI_B1_BASE
+                                        EUSCI_B2_BASE
+                                        EUSCI_B3_BASE
+ * @param   data            8 bit data/array or 16 bit data/array
+ * @param   registerName    Register name to read or write
+ * @param   len             Array length
  */
-void SPI_Send8BitData(uint32_t module, uint_fast8_t data)
+void SPI_Send8BitData(uint32_t module, uint8_t data)
 {
     SPI_transmitData(module, data);
     while (SPI_isBusy(module));
 }
 
-void SPI_Send8BitArray(uint32_t module, uint_fast8_t *data, uint32_t len)
+void SPI_Send8BitArray(uint32_t module, uint8_t *data, uint32_t len)
 {
     while (len--)
     {
@@ -236,21 +237,204 @@ void SPI_Send8BitArray(uint32_t module, uint_fast8_t *data, uint32_t len)
     }
 }
 
-void SPI_Send16BitData(uint32_t module, uint_fast16_t data)
+void SPI_Send16BitData(uint32_t module, uint16_t data)
 {
-    SPI_transmitData(module, (uint8_t) (data & 0xFF00) >> 8);
+    SPI_transmitData(module, (uint8_t) (data >> 8));
     while (SPI_isBusy(module));
-    SPI_transmitData(module, (uint8_t) (data & 0x00FF));
+    SPI_transmitData(module, (uint8_t) (data & 0x00ff));
     while (SPI_isBusy(module));
 }
 
-void SPI_Send16BitArray(uint32_t module, uint_fast16_t *data, uint32_t len)
+void SPI_Send16BitArray(uint32_t module, uint16_t *data, uint32_t len)
 {
     while (len--)
     {
-        SPI_transmitData(module, (uint8_t) (*data & 0xFF00) >> 8);
+        SPI_transmitData(module, (uint8_t) (*data >> 8));
         while (SPI_isBusy(module));
-        SPI_transmitData(module, (uint8_t) (*data++ & 0x00FF));
+        SPI_transmitData(module, (uint8_t) (*data++ & 0x00ff));
         while (SPI_isBusy(module));
+    }
+}
+
+void SPI_Write8BitRegister(uint32_t module, uint8_t registerName, uint8_t data)
+{
+    SPI_transmitData(module, registerName);
+    while (SPI_isBusy(module));
+    SPI_transmitData(module, data);
+    while (SPI_isBusy(module));
+}
+
+void SPI_Write8BitRegistersArray(uint32_t module, uint8_t registerName, const uint8_t *data, uint32_t len)
+{
+    SPI_transmitData(module, registerName);
+    while (SPI_isBusy(module));
+
+    while (len--)
+    {
+        SPI_transmitData(module, *data++);
+        while (SPI_isBusy(module));
+    }
+}
+
+void SPI_Write16BitRegister(uint32_t module, uint16_t registerName, uint16_t data)
+{
+    SPI_transmitData(module, (uint8_t) (registerName >> 8));
+    while (SPI_isBusy(module));
+    SPI_transmitData(module, (uint8_t) (registerName & 0x00ff));
+    while (SPI_isBusy(module));
+
+    SPI_transmitData(module, (uint8_t) (data >> 8));
+    while (SPI_isBusy(module));
+    SPI_transmitData(module, (uint8_t) (data & 0x00ff));
+    while (SPI_isBusy(module));
+}
+
+void SPI_Write16BitRegisterArray(uint32_t module, uint16_t registerName, const uint16_t *data, uint32_t len)
+{
+    SPI_transmitData(module, (uint8_t) (registerName >> 8));
+    while (SPI_isBusy(module));
+    SPI_transmitData(module, (uint8_t) (registerName & 0x00ff));
+    while (SPI_isBusy(module));
+
+    SPI_transmitData(module, (uint8_t) (*data >> 8));
+    while (SPI_isBusy(module));
+    SPI_transmitData(module, (uint8_t) (*data++ & 0x00ff));
+    while (SPI_isBusy(module));
+}
+
+uint8_t SPI_Receive8BitData(uint32_t module)
+{
+    uint8_t data = 0;
+
+    data = SPI_receiveData(module);
+    while (SPI_isBusy(module));
+
+    return data;
+}
+
+void SPI_Receive8BitArray(uint32_t module, uint8_t *data, uint32_t len)
+{
+    while (len--)
+    {
+        *data++ = SPI_receiveData(module);
+        while (SPI_isBusy(module));
+    }
+}
+
+uint16_t SPI_Receive16BitData(uint32_t module)
+{
+    uint16_t data = 0;
+
+    data = SPI_receiveData(module);
+    while (SPI_isBusy(module));
+
+    data = ((data << 8) | SPI_receiveData(module));
+    while (SPI_isBusy(module));
+
+    return data;
+}
+
+void SPI_Receive16BitArray(uint32_t module, uint16_t *data, uint32_t len)
+{
+    while (len--)
+    {
+        *data = SPI_receiveData(module);
+        while (SPI_isBusy(module));
+
+        *data = ((*data << 8) | SPI_receiveData(module));
+        data++;
+        while (SPI_isBusy(module));
+    }
+}
+
+uint8_t SPI_Read8BitRegister(uint32_t module, uint8_t registerName)
+{
+    uint8_t data = 0;
+
+    SPI_transmitData(module, registerName);
+    while (SPI_isBusy(module));
+
+    data = SPI_receiveData(module);
+    while (SPI_isBusy(module));
+
+    return data;
+}
+
+void SPI_Read8BitRegisterArray(uint32_t module, uint8_t registerName, uint8_t *data, uint32_t len)
+{
+    SPI_transmitData(module, registerName);
+    while (SPI_isBusy(module));
+
+    while (len--)
+    {
+        *data++ = SPI_receiveData(module);
+        while (SPI_isBusy(module));
+    }
+}
+
+uint16_t SPI_Read16BitRegister(uint32_t module, uint16_t registerName)
+{
+    uint16_t data = 0;
+
+    SPI_transmitData(module, (uint8_t) (registerName >> 8));
+    while (SPI_isBusy(module));
+    SPI_transmitData(module, (uint8_t) (registerName & 0x00ff));
+    while (SPI_isBusy(module));
+
+    data = SPI_receiveData(module);
+    while (SPI_isBusy(module));
+    data = ((data << 8) | SPI_receiveData(module));
+    while (SPI_isBusy(module));
+}
+
+void SPI_Read16BitRegisterArray(uint32_t module, uint16_t registerName, uint16_t *data, uint32_t len)
+{
+    SPI_transmitData(module, (uint8_t) (registerName >> 8));
+    while (SPI_isBusy(module));
+    SPI_transmitData(module, (uint8_t) (registerName & 0x00ff));
+    while (SPI_isBusy(module));
+
+    while (len--)
+    {
+        *data = SPI_receiveData(module);
+        while (SPI_isBusy(module));
+        *data = ((*data << 8) | SPI_receiveData(module));
+        while (SPI_isBusy(module));
+        data++;
+    }
+}
+
+void SPI_ReadWrite8BitArray(uint32_t module, const uint8_t *writeData, uint8_t *readData, uint32_t len)
+{
+    while (len--)
+    {
+        while (SPI_isBusy(module));
+        SPI_transmitData(module, *(writeData++));
+        if (readData != NULL)
+        {
+            *readData++ = SPI_receiveData(module);
+        }
+    }
+}
+
+void SPI_ReadWrite16BitArray(uint32_t module, const uint16_t *writeData, uint16_t *readData, uint32_t len)
+{
+    while (len--)
+    {
+        while (SPI_isBusy(module));
+        SPI_transmitData(module, (uint8_t) (*writeData >> 8));
+        if (readData != NULL)
+        {
+            *readData++ = SPI_receiveData(module);
+        }
+
+        while (SPI_isBusy(module));
+        SPI_transmitData(module, (uint8_t) (*writeData & 0x00ff));
+        if (readData != NULL)
+        {
+            *readData = SPI_receiveData(module);
+        }
+        writeData++;
+        readData++;
     }
 }

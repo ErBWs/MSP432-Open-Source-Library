@@ -1,5 +1,6 @@
 #include <driverlib.h>
 #include "header.h"
+#include "bsp/zf_device_icm20602.h"
 
 int main(void)
 {
@@ -11,6 +12,7 @@ int main(void)
 //    EnableUartInterrupt(EUSCI_A0_BASE, EUSCI_A_UART_RECEIVE_INTERRUPT);
 //    EnableUartInterrupt(EUSCI_A0_BASE, EUSCI_A_UART_TRANSMIT_INTERRUPT);
     GPIO_setAsOutputPin(GPIO_PORT_P1, GPIO_PIN0);
+    icm20602_init();
     ips114_init();
     ips114_show_string(0, 0, "hello");
 
@@ -25,7 +27,7 @@ int main(void)
 //        temp += 0.1f;
 //        VofaSendFrame();
 //        printf("sin: %f\n", sinf(temp));
-
+        printf("icm20602: %d\n", icm20602_acc_x);
         Delay_ms(100);
     }
 }

@@ -88,10 +88,31 @@ typedef enum
 
 void SPI_Init(SpiMode_e _mode, SpiCsMode_e _csMode, uint32_t baud, SpiClkPin_e _clkPin, SpiMosiPin_e _mosiPin, SpiMisoPin_e _misoPin, SpiCsPin_e _csPin);
 
-void SPI_Send8BitData(uint32_t module, uint_fast8_t data);
-void SPI_Send8BitArray(uint32_t module, uint_fast8_t *data, uint32_t len);
+void SPI_Send8BitData(uint32_t module, uint8_t data);
+void SPI_Send8BitArray(uint32_t module, uint8_t *data, uint32_t len);
 
-void SPI_Send16BitData(uint32_t module, uint_fast16_t data);
-void SPI_Send16BitArray(uint32_t module, uint_fast16_t *data, uint32_t len);
+void SPI_Send16BitData(uint32_t module, uint16_t data);
+void SPI_Send16BitArray(uint32_t module, uint16_t *data, uint32_t len);
+
+void SPI_Write8BitRegister(uint32_t module, uint8_t registerName, uint8_t data);
+void SPI_Write8BitRegistersArray(uint32_t module, uint8_t registerName, const uint8_t *data, uint32_t len);
+
+void SPI_Write16BitRegister(uint32_t module, uint16_t registerName, uint16_t data);
+void SPI_Write16BitRegisterArray(uint32_t module, uint16_t registerName, const uint16_t *data, uint32_t len);
+
+uint8_t SPI_Receive8BitData(uint32_t module);
+void SPI_Receive8BitArray(uint32_t module, uint8_t *data, uint32_t len);
+
+uint16_t SPI_Receive16BitData(uint32_t module);
+void SPI_Receive16BitArray(uint32_t module, uint16_t *data, uint32_t len);
+
+uint8_t SPI_Read8BitRegister(uint32_t module, uint8_t registerName);
+void SPI_Read8BitRegisterArray(uint32_t module, uint8_t registerName, uint8_t *data, uint32_t len);
+
+uint16_t SPI_Read16BitRegister(uint32_t module, uint16_t registerName);
+void SPI_Read16BitRegisterArray(uint32_t module, uint16_t registerName, uint16_t *data, uint32_t len);
+
+void SPI_ReadWrite8BitArray(uint32_t module, const uint8_t *writeData, uint8_t *readData, uint32_t len);
+void SPI_ReadWrite16BitArray(uint32_t module, const uint16_t *writeData, uint16_t *readData, uint32_t len);
 
 #endif
