@@ -52,7 +52,7 @@
 *                   ------------------------------------
 ********************************************************************************************************************/
 
-#include "zf_device_icm20602.h"
+#include "icm20602.h"
 
 int16_t icm20602_gyro_x = 0, icm20602_gyro_y = 0, icm20602_gyro_z = 0;            // 三轴陀螺仪数据      gyro (陀螺仪)
 int16_t icm20602_acc_x = 0, icm20602_acc_y = 0, icm20602_acc_z = 0;               // 三轴加速度计数据    acc (accelerometer 加速度计)
@@ -254,7 +254,7 @@ uint8_t icm20602_init (void)
     Delay_ms(10);                                                        // 上电延时
 
 #if ICM20602_USE_SOFT_IIC
-    SoftIIC_Init(&icm20602_iic_struct, ICM20602_DEV_ADDR, ICM20602_SOFT_IIC_DELAY,ICM20602_SCL_PORT, ICM20602_SCL_PIN,ICM20602_SCL_PORT, ICM20602_SDA_PIN);
+    SoftIIC_Init(&icm20602_iic_struct, ICM20602_DEV_ADDR, ICM20602_SOFT_IIC_DELAY,ICM20602_SCL_PORT, ICM20602_SCL_PIN,ICM20602_SDA_PORT, ICM20602_SDA_PIN);
 #else
     SPI_Init(SPI_MODE0, SPI_CS_MODE_NULL, ICM20602_SPI_SPEED, ICM20602_SPC_PIN, ICM20602_SDI_PIN, ICM20602_SDO_PIN, SPI_CS_NULL);
     GPIO_setAsOutputPin(ICM20602_CS_PORT, ICM20602_CS_PIN);

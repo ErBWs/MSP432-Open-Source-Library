@@ -352,8 +352,8 @@ uint8_t SPI_Read8BitRegister(uint32_t module, uint8_t registerName)
     uint8_t data = 0;
 
     SPI_transmitData(module, registerName);
-    while (SPI_isBusy(module));
 
+    SPI_transmitData(module, 0x55);
     data = SPI_receiveData(module);
     while (SPI_isBusy(module));
 
@@ -363,10 +363,10 @@ uint8_t SPI_Read8BitRegister(uint32_t module, uint8_t registerName)
 void SPI_Read8BitRegisterArray(uint32_t module, uint8_t registerName, uint8_t *data, uint32_t len)
 {
     SPI_transmitData(module, registerName);
-    while (SPI_isBusy(module));
 
     while (len--)
     {
+        SPI_transmitData(module, 0x55);
         *data++ = SPI_receiveData(module);
         while (SPI_isBusy(module));
     }
@@ -381,8 +381,10 @@ uint16_t SPI_Read16BitRegister(uint32_t module, uint16_t registerName)
     SPI_transmitData(module, (uint8_t) (registerName & 0x00ff));
     while (SPI_isBusy(module));
 
+    SPI_transmitData(module, 0x55);
     data = SPI_receiveData(module);
     while (SPI_isBusy(module));
+    SPI_transmitData(module, 0x55);
     data = ((data << 8) | SPI_receiveData(module));
     while (SPI_isBusy(module));
 }
@@ -396,8 +398,10 @@ void SPI_Read16BitRegisterArray(uint32_t module, uint16_t registerName, uint16_t
 
     while (len--)
     {
+        SPI_transmitData(module, 0x55);
         *data = SPI_receiveData(module);
         while (SPI_isBusy(module));
+        SPI_transmitData(module, 0x55);
         *data = ((*data << 8) | SPI_receiveData(module));
         while (SPI_isBusy(module));
         data++;

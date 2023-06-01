@@ -65,10 +65,10 @@
 #if ICM20602_USE_SOFT_IIC                                                       // 这两段 颜色正常的才是正确的 颜色灰的就是没有用的
 //====================================================软件 IIC 驱动====================================================
 #define ICM20602_SOFT_IIC_DELAY     100                                         // 软件 IIC 的时钟延时周期 数值越小 IIC 通信速率越快
-#define ICM20602_SCL_PORT           GPIO_PORT_P6                                          // 软件 IIC SCL 引脚 连接 MPU6050 的 SCL 引脚
-#define ICM20602_SCL_PIN            GPIO_PIN1                                          // 软件 IIC SCL 引脚 连接 MPU6050 的 SCL 引脚
-#define ICM20602_SDA_PORT           GPIO_PORT_P4                                          // 软件 IIC SDA 引脚 连接 MPU6050 的 SDA 引脚
-#define ICM20602_SDA_PIN            GPIO_PIN0                                          // 软件 IIC SDA 引脚 连接 MPU6050 的 SDA 引脚
+#define ICM20602_SCL_PORT           GPIO_PORT_P3                                          // 软件 IIC SCL 引脚 连接 MPU6050 的 SCL 引脚
+#define ICM20602_SCL_PIN            GPIO_PIN5                                          // 软件 IIC SCL 引脚 连接 MPU6050 的 SCL 引脚
+#define ICM20602_SDA_PORT           GPIO_PORT_P3                                          // 软件 IIC SDA 引脚 连接 MPU6050 的 SDA 引脚
+#define ICM20602_SDA_PIN            GPIO_PIN6                                          // 软件 IIC SDA 引脚 连接 MPU6050 的 SDA 引脚
 //====================================================软件 IIC 驱动====================================================
 #else
 //====================================================硬件 SPI 驱动====================================================
@@ -79,8 +79,8 @@
 #define ICM20602_SDO_PIN            SPI_B2_MISO_P37                           // 硬件 SPI MISO 引脚
 //====================================================硬件 SPI 驱动====================================================
 #endif
-#define ICM20602_CS_PORT            GPIO_PORT_P4                                          // CS 片选引脚
-#define ICM20602_CS_PIN             GPIO_PIN4                                          // CS 片选引脚
+#define ICM20602_CS_PORT            GPIO_PORT_P5                                          // CS 片选引脚
+#define ICM20602_CS_PIN             GPIO_PIN2                                          // CS 片选引脚
 #define ICM20602_CS(x)              (x? (GPIO_setOutputHighOnPin(ICM20602_CS_PORT, ICM20602_CS_PIN)): (GPIO_setOutputLowOnPin(ICM20602_CS_PORT, ICM20602_CS_PIN)))
 
 #define ICM20602_TIMEOUT_COUNT      0x00FF                                      // ICM20602 超时计数

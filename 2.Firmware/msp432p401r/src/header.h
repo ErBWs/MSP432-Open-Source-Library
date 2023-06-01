@@ -17,8 +17,11 @@
 #include "driver/user_uart.h"
 
 // User peripheral
-#include "bsp/zf_device_ips114.h"
+#include "bsp/bmi270.h"
+#include "bsp/common_font.h"
+#include "bsp/icm20602.h"
 #include "bsp/vofa.h"
+#include "bsp/zf_ips114.h"
 
 // User code
 #include "user/ctrl.h"

@@ -49,7 +49,7 @@
 ********************************************************************************************************************/
 
 
-#include "zf_device_ips114.h"
+#include "zf_ips114.h"
 
 static uint16_t                   ips114_pencolor     = IPS114_DEFAULT_PENCOLOR;
 static uint16_t                   ips114_bgcolor      = IPS114_DEFAULT_BGCOLOR;
