@@ -60,12 +60,11 @@ void UART_Init(uint32_t module, uint32_t baudRate)
             EUSCI_A_UART_MODE,                             // UART mode
             EUSCI_A_UART_OVERSAMPLING_BAUDRATE_GENERATION, // Oversampling
         };
-    eusci_calcBaudDividers((eUSCI_UART_Config *)&uartConfig, baudRate); // Set baud rate
+    ConfigBaudRate((eUSCI_UART_Config *)&uartConfig, baudRate); // Set baud rate
 #endif
 
     uint_fast8_t port;
     uint_fast16_t pin;
-    uint32_t interruptNum;
 
     switch (module)
     {
@@ -102,5 +101,26 @@ void UART_Send8BitData(uint32_t module, uint8_t data)
 void UART_Send8BitArray(uint32_t module, uint8_t *data, uint32_t len)
 {
     while (len--)
-        UART_Send8BitData(module, *data++);
+        UART_transmitData(module, *data++);
+}
+
+void UART_SendString(uint32_t module, const char *str)
+{
+    while (*str)
+        UART_transmitData(module, *str++);
+}
+
+void UART_Receive8BitData(uint32_t module, uint8_t *data)
+{
+    *data = UART_receiveData(module);
+}
+
+uint8_t UART_Query8BitData(uint32_t module, uint8_t *data)
+{
+    if (UART_queryStatusFlags(EUSCI_A_UART_RECEIVE_ERROR, 0))
+    {
+        *data = UART_receiveData(module);
+        return 1;
+    }
+    return 0;
 }

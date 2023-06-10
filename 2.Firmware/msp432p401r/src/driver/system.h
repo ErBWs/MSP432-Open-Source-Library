@@ -9,7 +9,9 @@
 #define SYSTEM_H
 
 #include <driverlib.h>
+#include "user_uart.h"
 
 void SystemClockInit();
+void SystemPrintfInit();
 
 #endif

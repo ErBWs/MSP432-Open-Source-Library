@@ -5,9 +5,9 @@ int main(void)
 {
     // System initialization
     SystemClockInit();
+    SystemPrintfInit();
 
     // User initialization
-    UART_Init(EUSCI_A0_BASE, 115200);
     GPIO_setAsOutputPin(GPIO_PORT_P1, GPIO_PIN0);
     icm20602_init();
 //    bmi270_init();

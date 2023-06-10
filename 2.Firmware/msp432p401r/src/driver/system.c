@@ -11,6 +11,7 @@
  * @brief       Initialize the whole system
  *
  * @param       None
+ *
  * @return      None
  *
  * @note        Do not modify! Or you may permanently destroy the mcu
@@ -32,8 +33,17 @@ void SystemClockInit()
     // Enable FPU
     FPU_enableModule();
     FPU_enableLazyStacking();
+}
 
-    P4->DIR |= BIT3;
-    P4->SEL0 |=BIT3;                        // Output MCLK
-    P4->SEL1 &= ~(BIT3);
+
+/*!
+ * @brief       Initialize the uart for printf function
+ *
+ * @param       None
+ *
+ * @return      None
+ */
+void SystemPrintfInit()
+{
+    UART_Init(EUSCI_A0_BASE, 115200);
 }
