@@ -40,11 +40,13 @@ void PWM_Init(PwmChannel_e _pin, const uint32_t freq, const uint_fast16_t duty)
     {
         case 0: af = GPIO_PRIMARY_MODULE_FUNCTION;      break;
         case 1: af = GPIO_SECONDARY_MODULE_FUNCTION;    break;
+        case 2: af = GPIO_TERTIARY_MODULE_FUNCTION;     break;
     }
     GPIO_setAsPeripheralModuleFunctionOutputPin((uint_fast8_t)((_pin & 0x000F0) >> 4), pin, af);
 
     // Get Timer period
-    uint32_t arr = 1000000 / freq - 1;
+    uint32_t ccr0 = 24000000 / freq - 1;
+    uint32_t ccr1 = ccr0 * duty / PWM_DUTY_MAX - 1;
 
     // Get channel
     uint_fast16_t channel;
@@ -61,11 +63,11 @@ void PWM_Init(PwmChannel_e _pin, const uint32_t freq, const uint_fast16_t duty)
     const Timer_A_PWMConfig userConfig =
             {
             TIMER_A_CLOCKSOURCE_SMCLK,          // Clock source
-            TIMER_A_CLOCKSOURCE_DIVIDER_48,     // Clock divider
-            arr,                                // The same as ARR in stm32
+            TIMER_A_CLOCKSOURCE_DIVIDER_2,     // Clock divider
+            ccr0,                                // The same as ARR in stm32
             channel,                            // Channel
             TIMER_A_OUTPUTMODE_TOGGLE_SET,      // Output mode
-            duty                                // PWM Duty
+            ccr1                                // PWM Duty
             };
 
     // Output PWM
@@ -113,8 +115,12 @@ void PWM_SetDuty(PwmChannel_e _pin, const uint_fast16_t duty)
         case 4: channel = TIMER_A_CAPTURECOMPARE_REGISTER_4;     break;
     }
 
+    // Get Timer period
+    uint32_t ccr0 = TIMER_A_CMSIS(timerA)->CCR[0];
+    uint32_t ccr1 = ccr0 * duty / PWM_DUTY_MAX - 1;
+
     // Change pwm duty
-    Timer_A_setCompareValue(timerA, channel,duty);
+    TIMER_A_CMSIS(timerA)->CCR[(channel>>1) - 1] = ccr1;
 }
 
 
@@ -138,8 +144,8 @@ void PWM_SetFreq(PwmChannel_e _pin, const uint32_t freq)
     }
 
     // Get Timer period
-    uint32_t arr = 1000000 / freq - 1;
+    uint32_t ccr0 = 24000000 / freq - 1;
 
     // Change pwm frequency
-    TIMER_A_CMSIS(timerA)->CCR[0] = arr;
+    TIMER_A_CMSIS(timerA)->CCR[0] = ccr0;
 }

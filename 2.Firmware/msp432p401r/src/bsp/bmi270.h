@@ -73,15 +73,15 @@
 #else
 //====================================================硬件 SPI 驱动====================================================
 #define BMI270_SPI_SPEED          (10*1000*1000)                              // 硬件 SPI 速率
-#define BMI270_SPI                EUSCI_B2_BASE                                       // 硬件 SPI 号
-#define BMI270_SPC_PIN            SPI_B2_CLK_P35                            // 硬件 SPI SCK 引脚
-#define BMI270_SDI_PIN            SPI_B2_MOSI_P36                           // 硬件 SPI MOSI 引脚
-#define BMI270_SDO_PIN            SPI_B2_MISO_P37                           // 硬件 SPI MISO 引脚
+#define BMI270_SPI                EUSCI_B3_BASE                                       // 硬件 SPI 号
+#define BMI270_SPC_PIN            SPI_B3_CLK_P101                            // 硬件 SPI SCK 引脚
+#define BMI270_SDI_PIN            SPI_B3_MOSI_P66                           // 硬件 SPI MOSI 引脚
+#define BMI270_SDO_PIN            SPI_B3_MISO_P67                           // 硬件 SPI MISO 引脚
 //====================================================硬件 SPI 驱动====================================================
 #endif
 
 #define BMI270_CS_PORT            GPIO_PORT_P5                                          // CS 片选引脚
-#define BMI270_CS_PIN             GPIO_PIN2                                          // CS 片选引脚
+#define BMI270_CS_PIN             GPIO_PIN1                                          // CS 片选引脚
 #define BMI270_CS(x)              (x? (GPIO_setOutputHighOnPin(BMI270_CS_PORT, BMI270_CS_PIN)): (GPIO_setOutputLowOnPin(BMI270_CS_PORT, BMI270_CS_PIN)))
 
 #define BMI270_TIMEOUT_COUNT      (0x00FF)                                    // BMI270 超时计数

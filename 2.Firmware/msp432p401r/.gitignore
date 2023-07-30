@@ -5,3 +5,4 @@ cmake-build-*/
 .idea
 src/user/*
 src/msp432p401r.code-workspace
+/src/EasyUI/

@@ -62,14 +62,14 @@
 #include "driver/user_spi.h"
 #include "driver/soft_iic.h"
 
-#define IMU963RA_USE_SOFT_IIC       0                                           // 默认使用硬件 SPI 方式驱动
+#define IMU963RA_USE_SOFT_IIC       1                                           // 默认使用硬件 SPI 方式驱动
 #if IMU963RA_USE_SOFT_IIC                                                       // 这两段 颜色正常的才是正确的 颜色灰的就是没有用的
 //====================================================软件 IIC 驱动====================================================
 #define IMU963RA_SOFT_IIC_DELAY     100                                         // 软件 IIC 的时钟延时周期 数值越小 IIC 通信速率越快
-#define IMU963RA_SCL_PORT           GPIO_PORT_P3                                          // 软件 IIC SCL 引脚 连接 MPU6050 的 SCL 引脚
-#define IMU963RA_SCL_PIN            GPIO_PIN5                                          // 软件 IIC SCL 引脚 连接 MPU6050 的 SCL 引脚
-#define IMU963RA_SDA_PORT           GPIO_PORT_P3                                          // 软件 IIC SDA 引脚 连接 MPU6050 的 SDA 引脚
-#define IMU963RA_SDA_PIN            GPIO_PIN6                                          // 软件 IIC SDA 引脚 连接 MPU6050 的 SDA 引脚
+#define IMU963RA_SCL_PORT           GPIO_PORT_P6                                          // 软件 IIC SCL 引脚 连接 MPU6050 的 SCL 引脚
+#define IMU963RA_SCL_PIN            GPIO_PIN1                                          // 软件 IIC SCL 引脚 连接 MPU6050 的 SCL 引脚
+#define IMU963RA_SDA_PORT           GPIO_PORT_P4                                          // 软件 IIC SDA 引脚 连接 MPU6050 的 SDA 引脚
+#define IMU963RA_SDA_PIN            GPIO_PIN0                                          // 软件 IIC SDA 引脚 连接 MPU6050 的 SDA 引脚
 //====================================================软件 IIC 驱动====================================================
 #else
 //====================================================硬件 SPI 驱动====================================================

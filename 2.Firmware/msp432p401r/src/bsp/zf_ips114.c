@@ -430,7 +430,7 @@ void ips114_show_int (uint16_t x, uint16_t y, const int32_t dat, uint8_t num)
         }
         dat_temp %= offset;
     }
-//    func_int_to_str(data_buffer, dat_temp);
+    func_int_to_str(data_buffer, dat_temp);
     ips114_show_string(x, y, (const char *)&data_buffer);
 }
 
@@ -461,7 +461,7 @@ void ips114_show_uint (uint16_t x, uint16_t y, const uint32_t dat, uint8_t num)
         }
         dat_temp %= offset;
     }
-//    func_uint_to_str(data_buffer, dat_temp);
+    func_uint_to_str(data_buffer, dat_temp);
     ips114_show_string(x, y, (const char *)&data_buffer);
 }
 
@@ -496,7 +496,7 @@ void ips114_show_float (uint16_t x, uint16_t y, const float dat, uint8_t num, ui
         }
         dat_temp = dat_temp - ((int)dat_temp / (int)offset) * offset;
     }
-//    func_float_to_str(data_buffer, dat_temp, pointnum);
+    func_float_to_str(data_buffer, dat_temp, pointnum);
     ips114_show_string(x, y, data_buffer);
 }
 
@@ -744,15 +744,15 @@ void ips114_init (void)
     ips114_set_dir(ips114_display_dir);
     ips114_set_color(ips114_pencolor, ips114_bgcolor);
 
-    IPS114_RST(0);
-    Delay_ms(200);
-
-    IPS114_RST(1);
-    Delay_ms(100);
+//    IPS114_RST(0);
+//    Delay_ms(200);
+//
+//    IPS114_RST(1);
+//    Delay_ms(100);
 
     IPS114_CS(0);
     ips114_write_index(0x36);
-    Delay_ms(100);
+    Delay_ms(50);
     if(ips114_display_dir == 0)
     {
         ips114_write_8bit_data(0x00);
@@ -845,5 +845,5 @@ void ips114_init (void)
     ips114_write_index(0x29);
     IPS114_CS(1);
 
-    ips114_clear();
+//    ips114_clear();
 }

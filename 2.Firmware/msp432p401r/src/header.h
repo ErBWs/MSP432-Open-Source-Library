@@ -20,12 +20,16 @@
 #include "bsp/bmi270.h"
 #include "bsp/common_font.h"
 #include "bsp/icm20602.h"
+#include "bsp/imu963ra.h"
 #include "bsp/vofa.h"
 #include "bsp/zf_ips114.h"
 
 // User code
 #include "user/ctrl.h"
-#include "user/easy_key.h"
+#include "EasyUI/easy_key.h"
+#include "EasyUI/easy_ui.h"
+#include "EasyUI/easy_ui_user_app.h"
+#include "EasyUI/user_ips114.h"
 #include "user/grayscale_sensor.h"
 #include "user/pid.h"
 
