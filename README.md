@@ -1,6 +1,4 @@
-# TICup-MSP432-Library
-
-[English](./README_en.md)
+# MSP432-Open-Source-Library
 
 欢迎pull request，不过请保持代码风格一致。
 

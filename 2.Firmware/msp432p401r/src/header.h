@@ -25,13 +25,6 @@
 #include "bsp/zf_ips114.h"
 
 // User code
-#include "user/ctrl.h"
-#include "EasyUI/easy_key.h"
-#include "EasyUI/easy_ui.h"
-#include "EasyUI/easy_ui_user_app.h"
-#include "EasyUI/user_ips114.h"
-#include "user/grayscale_sensor.h"
-#include "user/pid.h"
 
 
 #endif
